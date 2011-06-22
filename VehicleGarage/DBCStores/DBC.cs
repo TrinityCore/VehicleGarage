@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using VehicleGarage.DBCStructures;
 using VehicleGarage.Properties;
 
 namespace VehicleGarage.DBCStores
@@ -29,6 +30,15 @@ namespace VehicleGarage.DBCStores
             get { return "@" + Settings.Default.DBCPath; }
         }
 
+        /// <summary>
+        /// The actual in-memory storage of the loaded DBC files. Loaded in Loader()
+        /// </summary>
+        public static Dictionary<uint, VehicleEntry> Vehicle;
+        public static Dictionary<uint, VehicleSeatEntry> VehicleSeat;
+        public static Dictionary<uint, VehicleUIIndicatorEntry> VehicleUIIndicator;
+        public static Dictionary<uint, VehicleUIIndSeatEntry> VehicleUIIndSeat;
+
         public static LocalesDBC Locale { get; set; }
     }
+
 }

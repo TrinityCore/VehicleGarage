@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -50,7 +51,12 @@
     <Compile Include="Database\MySQLConnection.cs" />
     <Compile Include="DBCStores\DBC.cs" />
     <Compile Include="DBCStores\DBCReader.cs" />
-    <Compile Include="DBCStores\Structure.cs" />
+    <Compile Include="DBCStores\DBCHeader.cs" />
+    <Compile Include="DBCStructures\Constants.cs" />
+    <Compile Include="DBCStructures\VehicleEntry.cs" />
+    <Compile Include="DBCStructures\VehicleSeatEntry.cs" />
+    <Compile Include="DBCStructures\VehicleUIIndicatorEntry.cs" />
+    <Compile Include="DBCStructures\VehicleUIIndSeatEntry.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Forms\FormMain.cs">
       <SubType>Form</SubType>
@@ -61,7 +67,6 @@
     <Compile Include="Loader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

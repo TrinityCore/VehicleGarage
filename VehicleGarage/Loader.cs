@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using VehicleGarage.DBCStores;
+using VehicleGarage.DBCStructures;
 
 namespace VehicleGarage
 {
@@ -10,7 +11,10 @@ namespace VehicleGarage
     {
         static Loader()
         {
-            // Load up DBC files here
+            DBC.Vehicle = DBCReader.ReadDBC<VehicleEntry>(null);
+            DBC.VehicleSeat = DBCReader.ReadDBC<VehicleSeatEntry>(null);
+            DBC.VehicleUIIndicator = DBCReader.ReadDBC<VehicleUIIndicatorEntry>(null);
+            DBC.VehicleUIIndSeat = DBCReader.ReadDBC<VehicleUIIndSeatEntry>(null);
 
             DBC.Locale = DetectedLocale;
         }

@@ -12,7 +12,7 @@ namespace VehicleGarage.DBCStores
         public static unsafe Dictionary<uint, T> ReadDBC<T>(Dictionary<uint, string> strDict) where T : struct
         {
             var dict = new Dictionary<uint, T>();
-            String fileName = Path.Combine(DBC.DBCPath, typeof (T).Name + ".dbc").Replace("Entry", String.Empty);
+            var fileName = Path.Combine(DBC.DBCPath, typeof (T).Name + ".dbc").Replace("Entry", String.Empty);
 
             using (var reader = new BinaryReader(new FileStream(fileName, FileMode.Open, FileAccess.Read), Encoding.UTF8))
             {
