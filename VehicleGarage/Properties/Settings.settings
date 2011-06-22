@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="VehicleGarage.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Host" Type="System.String" Scope="User">
+      <Value Profile="(Default)">localhost</Value>
+    </Setting>
+    <Setting Name="Port" Type="System.String" Scope="User">
+      <Value Profile="(Default)">3306</Value>
+    </Setting>
+    <Setting Name="User" Type="System.String" Scope="User">
+      <Value Profile="(Default)">trinity</Value>
+    </Setting>
+    <Setting Name="Pass" Type="System.String" Scope="User">
+      <Value Profile="(Default)">trinity</Value>
+    </Setting>
+    <Setting Name="WorldDB" Type="System.String" Scope="User">
+      <Value Profile="(Default)">world</Value>
+    </Setting>
+    <Setting Name="DBCPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dbc</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
