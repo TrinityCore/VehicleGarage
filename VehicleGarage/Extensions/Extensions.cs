@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows.Forms;
 
 namespace VehicleGarage.Extensions
 {
@@ -43,6 +45,64 @@ namespace VehicleGarage.Extensions
             handle.Free();
 
             return returnObject;
+        }
+
+        public static void SetEnumValues<T>(this ComboBox cb, string NoValue)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ID");
+            dt.Columns.Add("NAME");
+
+            dt.Rows.Add(new Object[] { -1, NoValue });
+
+            foreach (var str in Enum.GetValues(typeof(T)))
+            {
+                dt.Rows.Add(new Object[] { (int)str, "(" + ((int)str).ToString("000") + ") " + str });
+            }
+
+            cb.DataSource = dt;
+            cb.DisplayMember = "NAME";
+            cb.ValueMember = "ID";
+        }
+
+        public static uint ToUInt32(this Object val)
+        {
+            if (val == null)
+                return 0;
+
+            uint num;
+            uint.TryParse(val.ToString(), out num);
+            return num;
+        }
+
+        public static int ToInt32(this Object val)
+        {
+            if (val == null)
+                return 0;
+
+            int num;
+            int.TryParse(val.ToString(), out num);
+            return num;
+        }
+
+        public static float ToFloat(this Object val)
+        {
+            if (val == null)
+                return 0.0f;
+
+            float num;
+            float.TryParse(val.ToString().Replace(',', '.'), out num);
+            return num;
+        }
+
+        public static ulong ToUlong(this Object val)
+        {
+            if (val == null)
+                return 0U;
+
+            ulong num;
+            ulong.TryParse(val.ToString(), out num);
+            return num;
         }
     }
 }
