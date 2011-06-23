@@ -7,26 +7,14 @@ using VehicleGarage.DBCStructures;
 
 namespace VehicleGarage
 {
-    public static class Loader
+    public class Loader
     {
-        static Loader()
+        public Loader()
         {
             DBC.Vehicle = DBCReader.ReadDBC<VehicleEntry>(null);
             DBC.VehicleSeat = DBCReader.ReadDBC<VehicleSeatEntry>(null);
             DBC.VehicleUIIndicator = DBCReader.ReadDBC<VehicleUIIndicatorEntry>(null);
             DBC.VehicleUIIndSeat = DBCReader.ReadDBC<VehicleUIIndSeatEntry>(null);
-
-            DBC.Locale = DetectedLocale;
-        }
-
-        private static LocalesDBC DetectedLocale
-        {
-            get
-            {
-                byte locale = 0;
-                // TODO: Detect locale based on strings
-                return (LocalesDBC)locale;
-            }
         }
     }
 }

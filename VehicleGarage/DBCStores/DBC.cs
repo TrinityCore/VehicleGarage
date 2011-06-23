@@ -7,19 +7,6 @@ using VehicleGarage.Properties;
 
 namespace VehicleGarage.DBCStores
 {
-    public enum LocalesDBC
-    {
-        enUS,
-        koKR,
-        frFR,
-        deDE,
-        zhCN,
-        zhTW,
-        esES,
-        esMX,
-        ruRU
-    };
-
     public static class DBC
     {
         public const int ClientVersion = 12340;
@@ -37,8 +24,6 @@ namespace VehicleGarage.DBCStores
         public static Dictionary<uint, VehicleSeatEntry> VehicleSeat;
         public static Dictionary<uint, VehicleUIIndicatorEntry> VehicleUIIndicator;
         public static Dictionary<uint, VehicleUIIndSeatEntry> VehicleUIIndSeat;
-
-        public static LocalesDBC Locale { get; set; }
     }
 
 }

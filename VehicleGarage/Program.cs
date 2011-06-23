@@ -18,6 +18,7 @@ namespace VehicleGarage
             
             try
             {
+                new Loader();
                 Application.Run(new FormMain());
             }
             catch (Exception ex)
