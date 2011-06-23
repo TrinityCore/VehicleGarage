@@ -1,8 +1,9 @@
 ﻿
 namespace VehicleGarage.DBCStructures
 {
-    enum Constants
+    enum Constants : uint
     {
-        MaxVehicleSeats = 8, 
+        MaxVehicleSeats = 8,
+        MaxCreatureSpells = 8,
     }
 }
