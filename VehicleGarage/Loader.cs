@@ -17,7 +17,7 @@ namespace VehicleGarage
             DBC.VehicleUIIndicator = DBCReader.ReadDBC<VehicleUIIndicatorEntry>(null);
             DBC.VehicleUIIndSeat = DBCReader.ReadDBC<VehicleUIIndSeatEntry>(null);
 
-            SQL.CreatureTemplate = SQLReader.ReadSQL<CreatureTemplate>();
+            SQL.CreatureTemplate = SQLReader.LoadCreatureTemplates();
         }
     }
 }

@@ -61,20 +61,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentNHibernate">
-      <HintPath>libs\FluentNHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="Iesi.Collections">
-      <HintPath>libs\Iesi.Collections.dll</HintPath>
-    </Reference>
     <Reference Include="MySql.Data">
       <HintPath>libs\MySql.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate">
-      <HintPath>libs\NHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate.ByteCode.Castle">
-      <HintPath>libs\NHibernate.ByteCode.Castle.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -88,7 +76,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SQLStores\SQLConnection.cs" />
     <Compile Include="SQLStores\SQLReader.cs" />
     <Compile Include="SQLStores\SQLStore.cs" />
     <Compile Include="DBCStores\DBC.cs" />

@@ -8,6 +8,9 @@ namespace VehicleGarage.SQLStores
 {
     public static class SQL
     {
-        public static List<CreatureTemplate> CreatureTemplate;
+        /// <summary>
+        /// Primary key being Entry
+        /// </summary>
+        public static Dictionary<int, CreatureTemplate> CreatureTemplate;
     }
 }
