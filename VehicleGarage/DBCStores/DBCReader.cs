@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -11,8 +12,10 @@ namespace VehicleGarage.DBCStores
     {
         public static unsafe Dictionary<uint, T> ReadDBC<T>(Dictionary<uint, string> strDict) where T : struct
         {
+            Contract.Requires(DBC.DBCPath != String.Empty);
+
             var dict = new Dictionary<uint, T>();
-            var fileName = Path.Combine(DBC.DBCPath, typeof (T).Name + ".dbc").Replace("Entry", String.Empty);
+            string fileName = Path.Combine(DBC.DBCPath, typeof(T).Name + ".dbc").Replace("Entry", String.Empty);
 
             using (var reader = new BinaryReader(new FileStream(fileName, FileMode.Open, FileAccess.Read), Encoding.UTF8))
             {
@@ -31,10 +34,10 @@ namespace VehicleGarage.DBCStores
                 // read dbc data
                 for (var r = 0; r < header.RecordsCount; ++r)
                 {
-                    uint key = reader.ReadUInt32();
+                    var key = reader.ReadUInt32();
                     reader.BaseStream.Position -= 4;
 
-                    T T_entry = reader.ReadStruct<T>();
+                    var T_entry = reader.ReadStruct<T>();
 
                     dict.Add(key, T_entry);
                 }

@@ -14,7 +14,7 @@ namespace VehicleGarage.DBCStores
 
         public static string DBCPath
         {
-            get { return "@" + Settings.Default.DBCPath; }
+            get { return Settings.Default.DBCPath; }
         }
 
         /// <summary>
@@ -24,6 +24,8 @@ namespace VehicleGarage.DBCStores
         public static Dictionary<uint, VehicleSeatEntry> VehicleSeat;
         public static Dictionary<uint, VehicleUIIndicatorEntry> VehicleUIIndicator;
         public static Dictionary<uint, VehicleUIIndSeatEntry> VehicleUIIndSeat;
+
+        public static Dictionary<uint, string> VehicleStrings;
     }
 
 }
