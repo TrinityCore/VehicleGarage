@@ -35,6 +35,8 @@
             this._chVehicleId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this._chUsedCount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this._rtVehicleInfo = new System.Windows.Forms.RichTextBox();
+            this._tcSeats = new System.Windows.Forms.TabControl();
+            this._rtbSeatInfo = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,22 +96,41 @@
             // _chUsedCount
             // 
             this._chUsedCount.Text = "Used count";
-            this._chUsedCount.Width = 80;
+            this._chUsedCount.Width = 75;
             // 
             // _rtVehicleInfo
             // 
             this._rtVehicleInfo.Location = new System.Drawing.Point(20, 39);
             this._rtVehicleInfo.Name = "_rtVehicleInfo";
-            this._rtVehicleInfo.Size = new System.Drawing.Size(323, 404);
+            this._rtVehicleInfo.Size = new System.Drawing.Size(323, 342);
             this._rtVehicleInfo.TabIndex = 8;
             this._rtVehicleInfo.Text = "";
             this._rtVehicleInfo.TextChanged += new System.EventHandler(this._rtVehicleInfo_TextChanged);
+            // 
+            // _tcSeats
+            // 
+            this._tcSeats.Location = new System.Drawing.Point(20, 392);
+            this._tcSeats.Name = "_tcSeats";
+            this._tcSeats.SelectedIndex = 0;
+            this._tcSeats.Size = new System.Drawing.Size(323, 18);
+            this._tcSeats.TabIndex = 9;
+            this._tcSeats.SelectedIndexChanged += new System.EventHandler(this._tcSeats_SelectedIndexChanged);
+            // 
+            // _rtbSeatInfo
+            // 
+            this._rtbSeatInfo.Location = new System.Drawing.Point(19, 416);
+            this._rtbSeatInfo.Name = "_rtbSeatInfo";
+            this._rtbSeatInfo.Size = new System.Drawing.Size(324, 91);
+            this._rtbSeatInfo.TabIndex = 10;
+            this._rtbSeatInfo.Text = "";
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(580, 517);
+            this.Controls.Add(this._rtbSeatInfo);
+            this.Controls.Add(this._tcSeats);
             this.Controls.Add(this._rtVehicleInfo);
             this.Controls.Add(this._lvSearchResults);
             this.Controls.Add(this.panel1);
@@ -129,6 +150,8 @@
         private System.Windows.Forms.RichTextBox _rtVehicleInfo;
         private System.Windows.Forms.ColumnHeader _chVehicleId;
         private System.Windows.Forms.ColumnHeader _chUsedCount;
+        private System.Windows.Forms.TabControl _tcSeats;
+        private System.Windows.Forms.RichTextBox _rtbSeatInfo;
     }
 }
 

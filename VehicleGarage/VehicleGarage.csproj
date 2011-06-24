@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="Extensions\RichTextBoxExtensions.cs" />
     <Compile Include="Info\VehicleInfo.cs" />
+    <Compile Include="Info\VehicleSeatInfo.cs" />
     <Compile Include="SQLStores\SQLReader.cs" />
     <Compile Include="SQLStores\SQLStore.cs" />
     <Compile Include="DBCStores\DBC.cs" />
