@@ -49,6 +49,34 @@ namespace VehicleGarage.SQLStores
             return dict;
         }
 
+        public static Dictionary<uint,  List<int>> LoadSpellClick()
+        {
+            var dict = new Dictionary<uint, List<int>>();
+
+            using (var conn = new MySqlConnection(ConnectionString))
+            {
+                var command =
+                    new MySqlCommand(
+                        "SELECT npc_entry,spell_id FROM npc_spellclick_spells AS sc LEFT JOIN creature_template AS ct ON sc.npc_entry = ct.entry WHERE ct.VehicleId <>0",
+                        conn);
+
+                conn.Open();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var npc = reader[0].ToUInt32();
+                        var spell = reader[1].ToInt32();
+                        if (!dict.ContainsKey(npc))
+                            dict.Add(npc, new List<int>());
+                        dict[npc].Add(spell);
+                    }
+                }
+            }
+
+            return dict;
+        }
 
         private static String ConnectionString
         {

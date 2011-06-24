@@ -12,5 +12,7 @@ namespace VehicleGarage.SQLStores
         /// Primary key being Entry
         /// </summary>
         public static Dictionary<int, CreatureTemplate> CreatureTemplate;
+
+        public static Dictionary<uint, List<int>> SpellClick;
     }
 }

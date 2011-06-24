@@ -1,6 +1,8 @@
-﻿
+﻿using System;
+
 namespace VehicleGarage.DBCStructures
 {
+    [Flags]
     public enum VehicleSeatFlags : uint
     {
         HasLowerAnimForEnter = 0x1,

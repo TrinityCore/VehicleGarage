@@ -76,12 +76,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\RichTextBoxExtensions.cs" />
+    <Compile Include="Info\VehicleInfo.cs" />
     <Compile Include="SQLStores\SQLReader.cs" />
     <Compile Include="SQLStores\SQLStore.cs" />
     <Compile Include="DBCStores\DBC.cs" />
     <Compile Include="DBCStores\DBCReader.cs" />
     <Compile Include="DBCStores\DBCHeader.cs" />
-    <Compile Include="DBCStructures\Constants.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="DBCStructures\VehicleEntry.cs" />
     <Compile Include="DBCStructures\VehicleFlags.cs" />
     <Compile Include="DBCStructures\VehiclePowerTypes.cs" />
@@ -125,9 +127,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Tests\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

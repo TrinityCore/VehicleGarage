@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
 using VehicleGarage.SQLStores;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -65,28 +66,31 @@ namespace TestProject1
         #endregion
 
         [TestMethod()]
-        public void ReadSQLTest()
+        public void VerifyRecordData()
         {
-            List<CreatureTemplate> actual = SQLReader.ReadSQL<CreatureTemplate>();
+            var actual = SQLReader.LoadCreatureTemplates();
 
-            var records =
-                from r in actual
-                where r.Id == 1
-                select r;
+            var record = actual[23693];
 
-            Assert.AreEqual(1, records.Count());
-            foreach (var record in records)
-            {
-                Assert.AreEqual(record.Name, "Waypoint (Only GM can see it)");
-                Assert.AreEqual(record.NPCFlag, (uint)0);
-                Assert.AreEqual(record.UnitFlags, (uint)0);
-                Assert.AreEqual(record.DynamicFlags, (uint)0);
-                Assert.AreEqual(record.VehicleId, (uint)0);
-                Assert.AreEqual(record.AIName, String.Empty);
-                Assert.AreEqual(record.InhabitType, (uint)7);
-                Assert.AreEqual(record.ScriptName, String.Empty);
-                Assert.AreEqual(record.WDBVerified, (uint)1);
-            }
+            Assert.AreEqual(record.Name, "Duskwing Eagle");
+            Assert.AreEqual(record.NPCFlag, 0u);
+            Assert.AreEqual(record.UnitFlags, 0u);
+            Assert.AreEqual(record.DynamicFlags, 8u);
+            Assert.AreEqual(record.VehicleId, 23u);
+            Assert.AreEqual(record.AIName, String.Empty);
+            Assert.AreEqual(record.InhabitType, 7u);
+            Assert.AreEqual(record.ScriptName, String.Empty);
+            Assert.AreEqual(record.WDBVerified, 12340u);
+        }
+
+        [TestMethod()]
+        public void VerifyTableData()
+        {
+            var actual = SQLReader.LoadCreatureTemplates();
+
+            Assert.AreEqual(actual.Count(), 231);
+            Assert.AreEqual(actual.Count(x => x.Value.VehicleId == 0), 0);
+            Assert.AreEqual(actual.Max(x => x.Value.Id), 40725u);
         }
     }
 }

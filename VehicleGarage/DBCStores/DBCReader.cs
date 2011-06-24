@@ -13,6 +13,7 @@ namespace VehicleGarage.DBCStores
         public static unsafe Dictionary<uint, T> ReadDBC<T>(Dictionary<uint, string> strDict) where T : struct
         {
             Contract.Requires(DBC.DBCPath != String.Empty);
+            Contract.Requires(DBC.DBCPath != null);
 
             var dict = new Dictionary<uint, T>();
             string fileName = Path.Combine(DBC.DBCPath, typeof(T).Name + ".dbc").Replace("Entry", String.Empty);

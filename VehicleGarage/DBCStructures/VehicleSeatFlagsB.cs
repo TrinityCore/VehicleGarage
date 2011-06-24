@@ -1,6 +1,8 @@
-﻿
+﻿using System;
+
 namespace VehicleGarage.DBCStructures
 {
+    [Flags]
     public enum VehicleSeatFlagsB : uint
     {
         Flag_0X1 = 0x1,
