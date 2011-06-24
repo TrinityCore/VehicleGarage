@@ -118,6 +118,7 @@
             // 
             // _rtbSeatInfo
             // 
+            this._rtbSeatInfo.CausesValidation = false;
             this._rtbSeatInfo.Location = new System.Drawing.Point(19, 416);
             this._rtbSeatInfo.Name = "_rtbSeatInfo";
             this._rtbSeatInfo.Size = new System.Drawing.Size(324, 91);

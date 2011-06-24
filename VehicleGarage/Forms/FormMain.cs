@@ -80,6 +80,7 @@ namespace VehicleGarage
             _rtbSeatInfo.Clear();
             if (_tcSeats.SelectedIndex >= 0)
                 _currentInfo.ViewSeatInfo(_tcSeats.SelectedIndex);
+            _lvSearchResults.Focus();
         }
     }
 }
