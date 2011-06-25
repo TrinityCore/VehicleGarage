@@ -26,7 +26,24 @@ namespace VehicleGarage.Info
             _rtb.Clear();
             _rtb.SetBold();
             _rtb.AppendFormatLine("Seat ID: {0}", _seat.Id);
+            _rtb.AppendLine();
+            _rtb.SetBold();
+            _rtb.AppendFormatLine("Has VehiceSeatFlags:");
             _rtb.SetDefaultStyle();
+            for (var i = 0; i < 32; ++i)
+                if ((_seat.Flags & (1 << i)) != 0L)
+                    _rtb.AppendFormatLine("{0}", (VehicleSeatFlags)(1 << i));
+ 
+
+            _rtb.AppendLine();
+            _rtb.SetBold();
+            _rtb.AppendFormatLine("Has VehiceSeatFlagsB:");
+            _rtb.SetDefaultStyle();
+            for (var i = 0; i < 32; ++i)
+                if ((_seat.Flags & (1 << i)) != 0L)
+                    _rtb.AppendFormatLine("{0}", (VehicleSeatFlagsB)(1 << i));
+            _rtb.SetDefaultStyle();
+
         }
     }
 }

@@ -35,5 +35,6 @@ namespace VehicleGarage.DBCStructures
         Flag_0X8000000 = 0x8000000,
         Flag_0X10000000 = 0x10000000,
         Flag_0X20000000 = 0x20000000,
+        Flag_0X40000000 = 0x40000000,
     }
 }

@@ -52,7 +52,9 @@ namespace VehicleGarage
 
         private void SearchResultsListViewRetrieveVItem(object sender, RetrieveVirtualItemEventArgs e)
         {
-            // TODO: Creature template data
+            Contract.Requires(e.ItemIndex >= 0);
+            Contract.Requires(e.ItemIndex < this._vehicleResults.Count);
+
             var vehicle = _vehicleResults[e.ItemIndex];
             e.Item = new ListViewItem(new[] { vehicle.Id.ToString(), VehicleInfo.GetUsedCount(vehicle).ToString()});
         }
@@ -64,9 +66,12 @@ namespace VehicleGarage
 
         private void _lvSearchResults_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _tcSeats.TabPages.Clear();
+            foreach (TabPage tab in _tcSeats.TabPages.Cast<object>().Where(tab => !tab.Equals(_tpMain)))
+                _tcSeats.TabPages.Remove(tab);
+            _tcSeats.SelectedTab = _tpMain;
+
             if (_lvSearchResults.SelectedIndices.Count > 0)
-                _currentInfo = new VehicleInfo(_rtVehicleInfo, _rtbSeatInfo, _tcSeats, _vehicleResults[_lvSearchResults.SelectedIndices[0]]);
+                _currentInfo = new VehicleInfo(_rtVehicleInfo, _tcSeats, _vehicleResults[_lvSearchResults.SelectedIndices[0]]);
         }
 
         private void _rtVehicleInfo_TextChanged(object sender, EventArgs e)
@@ -77,10 +82,13 @@ namespace VehicleGarage
         private void _tcSeats_SelectedIndexChanged(object sender, EventArgs e)
         {
             Contract.Requires(_tcSeats.SelectedIndex < 8);
-            _rtbSeatInfo.Clear();
-            if (_tcSeats.SelectedIndex >= 0)
+            Contract.Requires(_tcSeats.SelectedIndex >= 0);
+            Contract.Requires((_tcSeats.SelectedIndex - 1) < _currentInfo._seats.Count);
+
+            if (_tcSeats.SelectedIndex > 0)
                 _currentInfo.ViewSeatInfo(_tcSeats.SelectedIndex);
-            _lvSearchResults.Focus();
+            else if (_currentInfo != null)
+                _currentInfo.ViewVehicleInfo();
         }
     }
 }
