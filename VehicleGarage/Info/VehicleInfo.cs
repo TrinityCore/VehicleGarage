@@ -16,7 +16,7 @@ namespace VehicleGarage.Info
         private readonly RichTextBox _rtb;
         private readonly TabControl _tabControl;
         private VehicleEntry _vehicle;
-        public readonly List<VehicleSeatInfo> _seats = new List<VehicleSeatInfo>();
+        public readonly List<VehicleSeatInfo> Seats = new List<VehicleSeatInfo>();
 
         public VehicleInfo(RichTextBox rtbMain, TabControl tabControl, VehicleEntry vehicle)
         {
@@ -34,7 +34,7 @@ namespace VehicleGarage.Info
 
                 _tabControl.TabPages.Add("seat" + i);
                 var seatInfo = new VehicleSeatInfo(_rtb, DBC.VehicleSeat[m]);
-                _seats.Add(seatInfo);
+                Seats.Add(seatInfo);
             }
 
             ViewVehicleInfo();
@@ -81,9 +81,9 @@ namespace VehicleGarage.Info
 
         public void ViewSeatInfo(int pos)
         {
-            Contract.Requires((pos - 1) < _seats.Count);
+            Contract.Requires((pos - 1) < Seats.Count);
             Contract.Requires((pos - 1) >= 0);
-            _seats[--pos].ViewSeatInfo();
+            Seats[--pos].ViewSeatInfo();
         }
 
         public static uint GetUsedCount(VehicleEntry vehicle)

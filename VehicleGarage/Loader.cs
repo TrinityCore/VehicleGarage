@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Text;
 using VehicleGarage.SQLStores;
 using VehicleGarage.DBCStores;
@@ -12,6 +13,8 @@ namespace VehicleGarage
     {
         public Loader()
         {
+            Contract.Requires(DBC.DBCPath != null);
+
             DBC.Vehicle = DBCReader.ReadDBC<VehicleEntry>(DBC.VehicleStrings);
             DBC.VehicleSeat = DBCReader.ReadDBC<VehicleSeatEntry>(null);
             DBC.VehicleUIIndicator = DBCReader.ReadDBC<VehicleUIIndicatorEntry>(null);

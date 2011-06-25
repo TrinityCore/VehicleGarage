@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.panel1 = new System.Windows.Forms.Panel();
             this._bSearch = new System.Windows.Forms.Button();
             this._cbPowerType = new System.Windows.Forms.ComboBox();
@@ -184,8 +185,9 @@
             this.Controls.Add(this._rtVehicleInfo);
             this.Controls.Add(this._lvSearchResults);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormMain";
-            this.Text = "FormMain";
+            this.Text = "Vehicle Garage";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this._tcSeats.ResumeLayout(false);
