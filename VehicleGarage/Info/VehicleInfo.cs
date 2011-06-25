@@ -33,7 +33,7 @@ namespace VehicleGarage.Info
                 Contract.Assume(DBC.VehicleSeat.ContainsKey(m));
 
                 _tabControl.TabPages.Add("seat" + i);
-                var seatInfo = new VehicleSeatInfo(_rtb, DBC.VehicleSeat[m], i);
+                var seatInfo = new VehicleSeatInfo(_rtb, DBC.VehicleSeat[m]);
                 _seats.Add(seatInfo);
             }
 

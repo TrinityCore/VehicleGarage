@@ -34,12 +34,38 @@ namespace VehicleGarage
         {
             Contract.Requires(DBC.Vehicle != null);
 
+            var vehicleIdFilter = _tbIdOrName.Text.ToInt32();
+            var filterVehicleId = (_cbIdOrName.SelectedIndex == 1 && _tbIdOrName.Text != null);
+
+            var creatureIdFilter = _tbIdOrName.Text.ToInt32();
+            var filterCreatureId = (_cbIdOrName.SelectedIndex == 2 && _tbIdOrName.Text != null);
+
+            var creatureNameFilter = _tbIdOrName.Text;
+            var filterCreatureName = (_cbIdOrName.SelectedIndex == 3 && _tbIdOrName.Text != null);
+            
             var filterPowerType = (_cbPowerType.SelectedIndex != 0);
             var powerTypeFilter = _cbPowerType.SelectedValue.ToInt32();
 
-            _vehicleResults = (from vehicle in DBC.Vehicle.Values
+            _vehicleResults = DBC.Vehicle.Values.Where(x => (
+                                                                (!filterVehicleId || x.Id == vehicleIdFilter)
+                                                                &&
+                                                                (!filterCreatureId ||
+                                                                 SQL.CreatureTemplate.Count(
+                                                                     y =>
+                                                                     y.Value.VehicleId == x.Id &&
+                                                                     y.Value.Id == creatureIdFilter) == 1)
+                                                                &&
+                                                                (!filterCreatureName ||
+                                                                 SQL.CreatureTemplate.Count(
+                                                                     y =>
+                                                                     y.Value.VehicleId == x.Id &&
+                                                                     y.Value.Name.Contains(creatureNameFilter)) == 1)
+                                                                && (!filterPowerType || x.PowerType == powerTypeFilter)
+                                                            )
+                                                       ).ToList();
+           /* _vehicleResults = (from vehicle in DBC.Vehicle.Values
                                where (!filterPowerType || vehicle.PowerType == powerTypeFilter)
-                               select vehicle).ToList();
+                               select vehicle).ToList();*/
 
             _lvSearchResults.VirtualListSize = _vehicleResults.Count();
             if (_lvSearchResults.SelectedIndices.Count > 0)
@@ -81,9 +107,9 @@ namespace VehicleGarage
 
         private void _tcSeats_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Contract.Requires(_tcSeats.SelectedIndex < 8);
+            Contract.Requires(_tcSeats.SelectedIndex < 9);
             Contract.Requires(_tcSeats.SelectedIndex >= 0);
-            Contract.Requires((_tcSeats.SelectedIndex - 1) < _currentInfo._seats.Count);
+            Contract.Requires((_tcSeats.SelectedIndex - 1) < _currentInfo.Seats.Count);
 
             if (_tcSeats.SelectedIndex > 0)
                 _currentInfo.ViewSeatInfo(_tcSeats.SelectedIndex);

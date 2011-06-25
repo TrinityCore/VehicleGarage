@@ -37,17 +37,25 @@
             this._rtVehicleInfo = new System.Windows.Forms.RichTextBox();
             this._tcSeats = new System.Windows.Forms.TabControl();
             this._tpMain = new System.Windows.Forms.TabPage();
+            this._labelPowerType = new System.Windows.Forms.Label();
+            this._tbIdOrName = new System.Windows.Forms.TextBox();
+            this._cbIdOrName = new System.Windows.Forms.ComboBox();
+            this._labelColon = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this._tcSeats.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this._labelColon);
+            this.panel1.Controls.Add(this._cbIdOrName);
+            this.panel1.Controls.Add(this._tbIdOrName);
+            this.panel1.Controls.Add(this._labelPowerType);
             this.panel1.Controls.Add(this._bSearch);
             this.panel1.Controls.Add(this._cbPowerType);
             this.panel1.Location = new System.Drawing.Point(370, 22);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(191, 183);
+            this.panel1.Size = new System.Drawing.Size(250, 196);
             this.panel1.TabIndex = 0;
             // 
             // _bSearch
@@ -63,7 +71,7 @@
             // _cbPowerType
             // 
             this._cbPowerType.FormattingEnabled = true;
-            this._cbPowerType.Location = new System.Drawing.Point(17, 17);
+            this._cbPowerType.Location = new System.Drawing.Point(100, 67);
             this._cbPowerType.Name = "_cbPowerType";
             this._cbPowerType.Size = new System.Drawing.Size(140, 21);
             this._cbPowerType.TabIndex = 0;
@@ -129,11 +137,49 @@
             this._tpMain.Text = "Vehicle";
             this._tpMain.UseVisualStyleBackColor = true;
             // 
+            // _labelPowerType
+            // 
+            this._labelPowerType.AutoSize = true;
+            this._labelPowerType.Location = new System.Drawing.Point(3, 75);
+            this._labelPowerType.Name = "_labelPowerType";
+            this._labelPowerType.Size = new System.Drawing.Size(63, 13);
+            this._labelPowerType.TabIndex = 2;
+            this._labelPowerType.Text = "Power type:";
+            // 
+            // _tbIdOrName
+            // 
+            this._tbIdOrName.Location = new System.Drawing.Point(113, 14);
+            this._tbIdOrName.Name = "_tbIdOrName";
+            this._tbIdOrName.Size = new System.Drawing.Size(127, 20);
+            this._tbIdOrName.TabIndex = 3;
+            // 
+            // _cbIdOrName
+            // 
+            this._cbIdOrName.FormattingEnabled = true;
+            this._cbIdOrName.Items.AddRange(new object[] {
+            "",
+            "Vehicle ID",
+            "Creature ID",
+            "Creature Name"});
+            this._cbIdOrName.Location = new System.Drawing.Point(6, 14);
+            this._cbIdOrName.Name = "_cbIdOrName";
+            this._cbIdOrName.Size = new System.Drawing.Size(94, 21);
+            this._cbIdOrName.TabIndex = 4;
+            // 
+            // _labelColon
+            // 
+            this._labelColon.AutoSize = true;
+            this._labelColon.Location = new System.Drawing.Point(106, 17);
+            this._labelColon.Name = "_labelColon";
+            this._labelColon.Size = new System.Drawing.Size(10, 13);
+            this._labelColon.TabIndex = 5;
+            this._labelColon.Text = ":";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 444);
+            this.ClientSize = new System.Drawing.Size(632, 445);
             this.Controls.Add(this._tcSeats);
             this.Controls.Add(this._rtVehicleInfo);
             this.Controls.Add(this._lvSearchResults);
@@ -141,6 +187,7 @@
             this.Name = "FormMain";
             this.Text = "FormMain";
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this._tcSeats.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -157,6 +204,10 @@
         private System.Windows.Forms.ColumnHeader _chUsedCount;
         private System.Windows.Forms.TabControl _tcSeats;
         private System.Windows.Forms.TabPage _tpMain;
+        private System.Windows.Forms.Label _labelPowerType;
+        private System.Windows.Forms.TextBox _tbIdOrName;
+        private System.Windows.Forms.ComboBox _cbIdOrName;
+        private System.Windows.Forms.Label _labelColon;
     }
 }
 
