@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using VehicleGarage.Extensions;
 using VehicleGarage.DBCStructures;
 using VehicleGarage.DBCStores;
+using VehicleGarage.Forms;
 using VehicleGarage.Info;
 using VehicleGarage.SQLStores;
 using System.Diagnostics.Contracts;
@@ -22,7 +23,13 @@ namespace VehicleGarage
         {
             InitializeComponent();
 
+            _cbVehicleFlagsOperator.SelectedIndex = 0;
+            _cbVehicleSeatFlagsOperator.SelectedIndex = 0;
+            _cbVehicleSeatFlagsBOperator.SelectedIndex = 0;
+            _cbIdOrName.SelectedIndex = 0;
             _cbPowerType.SetEnumValues<VehiclePowerTypes>("PowerType");
+            _cbAdvancedFilter1.SetStructFields<VehicleEntry>();
+            _cbAdvancedFilter2.SetStructFields<VehicleEntry>();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -35,41 +42,66 @@ namespace VehicleGarage
             Contract.Requires(DBC.Vehicle != null);
 
             var vehicleIdFilter = _tbIdOrName.Text.ToInt32();
-            var filterVehicleId = (_cbIdOrName.SelectedIndex == 1 && _tbIdOrName.Text != null);
+            var filterVehicleId = (_cbIdOrName.SelectedIndex == 0 && _tbIdOrName.Text != String.Empty);
 
             var creatureIdFilter = _tbIdOrName.Text.ToInt32();
-            var filterCreatureId = (_cbIdOrName.SelectedIndex == 2 && _tbIdOrName.Text != null);
+            var filterCreatureId = (_cbIdOrName.SelectedIndex == 1 && _tbIdOrName.Text != String.Empty);
 
             var creatureNameFilter = _tbIdOrName.Text;
-            var filterCreatureName = (_cbIdOrName.SelectedIndex == 3 && _tbIdOrName.Text != null);
+            var filterCreatureName = (_cbIdOrName.SelectedIndex == 2 && _tbIdOrName.Text != String.Empty);
+
+            var vehicleFlagMaskFilter = _tbVehicleFlags.Text.ToUInt32FromPossibleHexString();
+            var filterVehicleFlagMask = (vehicleFlagMaskFilter != 0);
+            var vehicleFlagMaskFilterOperator = (_cbVehicleFlagsOperator.SelectedIndex == 0) ? true : false;
+
+            var vehicleSeatFlagMaskFilter = _tbVehicleSeatFlags.Text.ToUInt32FromPossibleHexString();
+            var filterVehicleSeatFlagMask = (vehicleSeatFlagMaskFilter != 0);
+            var vehicleSeatFlagMaskFilterOperator = (_cbVehicleSeatFlagsOperator.SelectedIndex == 0) ? true : false;
+
+            var vehicleSeatFlagBMaskFilter = _tbVehicleSeatFlagsB.Text.ToUInt32FromPossibleHexString();
+            var filterVehicleSeatFlagBMask = (vehicleSeatFlagBMaskFilter != 0);
+            var vehicleSeatFlagBMaskFilterOperator = (_cbVehicleSeatFlagsBOperator.SelectedIndex == 0) ? true : false;
             
             var filterPowerType = (_cbPowerType.SelectedIndex != 0);
             var powerTypeFilter = _cbPowerType.SelectedValue.ToInt32();
 
             _vehicleResults = DBC.Vehicle.Values.Where(x => (
-                                                                (!filterVehicleId || x.Id == vehicleIdFilter)
-                                                                &&
-                                                                (!filterCreatureId ||
-                                                                 SQL.CreatureTemplate.Count(
-                                                                     y =>
-                                                                     y.Value.VehicleId == x.Id &&
-                                                                     y.Value.Id == creatureIdFilter) == 1)
-                                                                &&
-                                                                (!filterCreatureName ||
-                                                                 SQL.CreatureTemplate.Count(
-                                                                     y =>
-                                                                     y.Value.VehicleId == x.Id &&
-                                                                     y.Value.Name.Contains(creatureNameFilter)) == 1)
-                                                                && (!filterPowerType || x.PowerType == powerTypeFilter)
-                                                            )
-                                                       ).ToList();
-           /* _vehicleResults = (from vehicle in DBC.Vehicle.Values
-                               where (!filterPowerType || vehicle.PowerType == powerTypeFilter)
-                               select vehicle).ToList();*/
+                (!filterVehicleId || x.Id == vehicleIdFilter)
+                &&
+                (!filterCreatureId ||
+                    SQL.CreatureTemplate.Count(
+                        y =>
+                        y.Value.VehicleId == x.Id &&
+                        y.Value.Id == creatureIdFilter) == 1)
+                &&
+                (!filterCreatureName ||
+                    SQL.CreatureTemplate.Count(
+                        y =>
+                        y.Value.VehicleId == x.Id &&
+                        y.Value.Name.Contains(creatureNameFilter)) == 1)
+                &&
+                (!filterVehicleFlagMask ||
+                    ((vehicleFlagMaskFilterOperator && (x.Flags & vehicleFlagMaskFilter) != 0)
+                    || (!vehicleFlagMaskFilterOperator && (x.Flags & vehicleFlagMaskFilter) == 0)))
+                &&
+                (!filterVehicleSeatFlagMask ||
+                    ((vehicleSeatFlagMaskFilterOperator && (x.SeatId.Count(y => (y > 0) && (DBC.VehicleSeat[y].Flags & vehicleSeatFlagMaskFilter) != 0) > 0))
+                    || (!vehicleSeatFlagMaskFilterOperator && (x.SeatId.Count(y => (y > 0) && (DBC.VehicleSeat[y].Flags & vehicleSeatFlagMaskFilter) == 0) > 0))
+                    ))
+                &&
+                (!filterVehicleSeatFlagBMask ||
+                    ((vehicleSeatFlagBMaskFilterOperator && (x.SeatId.Count(y => (y > 0) && (DBC.VehicleSeat[y].FlagsB & vehicleSeatFlagBMaskFilter) != 0) > 0))
+                    || (!vehicleSeatFlagBMaskFilterOperator && (x.SeatId.Count(y => (y > 0) && (DBC.VehicleSeat[y].FlagsB & vehicleSeatFlagBMaskFilter) == 0) > 0))
+                    ))
+
+                && (!filterPowerType || x.PowerType == powerTypeFilter))
+            ).ToList();
 
             _lvSearchResults.VirtualListSize = _vehicleResults.Count();
             if (_lvSearchResults.SelectedIndices.Count > 0)
-                _lvSearchResults.Items[_lvSearchResults.SelectedIndices[0]].Selected = false;
+                _lvSearchResults.Items[_lvSearchResults.SelectedIndices[0]].Selected = true;
+
+            _lvSearchResults.Focus();
         }
 
         private List<VehicleEntry> _vehicleResults = new List<VehicleEntry>();
@@ -115,6 +147,17 @@ namespace VehicleGarage
                 _currentInfo.ViewSeatInfo(_tcSeats.SelectedIndex);
             else if (_currentInfo != null)
                 _currentInfo.ViewVehicleInfo();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void infoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var ab = new AboutForm();
+            ab.ShowDialog();
         }
     }
 }

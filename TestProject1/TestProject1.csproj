@@ -56,6 +56,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExtensionsTest.cs" />
     <Compile Include="FormMainTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLReaderTest.cs" />

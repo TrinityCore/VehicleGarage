@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
@@ -65,6 +66,33 @@ namespace VehicleGarage.Extensions
             cb.ValueMember = "ID";
         }
 
+        public static void SetStructFields<T>(this ComboBox cb)
+        {
+            cb.Items.Clear();
+
+            var dt = new DataTable();
+            dt.Columns.Add("ID", typeof(MemberInfo));
+            dt.Columns.Add("NAME", typeof(String));
+
+            var type = typeof(T).GetMembers();
+            var i = 0;
+            foreach (var str in type)
+            {
+                if (!(str is FieldInfo) && !(str is PropertyInfo)) 
+                    continue;
+
+                var dr = dt.NewRow();
+                dr["ID"] = str;
+                dr["NAME"] = String.Format("({0:000}) {1}", i, str.Name);
+                dt.Rows.Add(dr);
+                i++;
+            }
+
+            cb.DataSource = dt;
+            cb.DisplayMember = "NAME";
+            cb.ValueMember = "ID";
+        }
+
         public static uint ToUInt32(this Object val)
         {
             if (val == null)
@@ -73,6 +101,28 @@ namespace VehicleGarage.Extensions
             uint num;
             uint.TryParse(val.ToString(), out num);
             return num;
+        }
+
+        public static uint ToUInt32FromPossibleHexString(this Object val)
+        {
+            if (val.GetType() == typeof(String))
+            {
+                var newVal = ((String)val).Replace("0x", String.Empty);
+                if (newVal.Equals(val))
+                    return val.ToUInt32(); 
+                    
+                try
+                {
+                    return uint.Parse(newVal, System.Globalization.NumberStyles.AllowHexSpecifier);
+                }
+                catch (OverflowException ex)
+                {
+                    MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return 0u;
+                }
+            }
+
+            return val.ToUInt32();
         }
 
         public static int ToInt32(this Object val)
