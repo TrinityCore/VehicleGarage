@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using VehicleGarage.Extensions;
@@ -54,6 +55,12 @@ namespace VehicleGarage
             var filterVehicleFlagMask = (vehicleFlagMaskFilter != 0);
             var vehicleFlagMaskFilterOperator = (_cbVehicleFlagsOperator.SelectedIndex == 0) ? true : false;
 
+            var filterPowerType = (_cbPowerType.SelectedIndex != 0);
+            var powerTypeFilter = _cbPowerType.SelectedValue.ToInt32();
+
+            var filterSeatId = (_tbSeatId.Text != String.Empty);
+            var seatIdFilter = _tbSeatId.Text.ToUInt32();
+
             var vehicleSeatFlagMaskFilter = _tbVehicleSeatFlags.Text.ToUInt32FromPossibleHexString();
             var filterVehicleSeatFlagMask = (vehicleSeatFlagMaskFilter != 0);
             var vehicleSeatFlagMaskFilterOperator = (_cbVehicleSeatFlagsOperator.SelectedIndex == 0) ? true : false;
@@ -61,10 +68,15 @@ namespace VehicleGarage
             var vehicleSeatFlagBMaskFilter = _tbVehicleSeatFlagsB.Text.ToUInt32FromPossibleHexString();
             var filterVehicleSeatFlagBMask = (vehicleSeatFlagBMaskFilter != 0);
             var vehicleSeatFlagBMaskFilterOperator = (_cbVehicleSeatFlagsBOperator.SelectedIndex == 0) ? true : false;
-            
-            var filterPowerType = (_cbPowerType.SelectedIndex != 0);
-            var powerTypeFilter = _cbPowerType.SelectedValue.ToInt32();
 
+            var advancedFilter1 = _tbAdvancedFilter1.Text;
+            var field1 = (MemberInfo) _cbAdvancedFilter1.SelectedValue;
+            var filterAdvanced1 = (advancedFilter1 != String.Empty);
+
+            var advancedFilter2 = _tbAdvancedFilter2.Text;
+            var field2 = (MemberInfo) _cbAdvancedFilter2.SelectedValue;
+            var filterAdvanced2 = (advancedFilter2 != String.Empty);
+            
             _vehicleResults = DBC.Vehicle.Values.Where(x => (
                 (!filterVehicleId || x.Id == vehicleIdFilter)
                 &&
@@ -84,6 +96,12 @@ namespace VehicleGarage
                     ((vehicleFlagMaskFilterOperator && (x.Flags & vehicleFlagMaskFilter) != 0)
                     || (!vehicleFlagMaskFilterOperator && (x.Flags & vehicleFlagMaskFilter) == 0)))
                 &&
+                (!filterPowerType || 
+                    x.PowerType == powerTypeFilter)
+                &&
+                (!filterSeatId ||
+                    x.SeatId.Count(y => y == seatIdFilter) > 0)
+                &&
                 (!filterVehicleSeatFlagMask ||
                     ((vehicleSeatFlagMaskFilterOperator && (x.SeatId.Count(y => (y > 0) && (DBC.VehicleSeat[y].Flags & vehicleSeatFlagMaskFilter) != 0) > 0))
                     || (!vehicleSeatFlagMaskFilterOperator && (x.SeatId.Count(y => (y > 0) && (DBC.VehicleSeat[y].Flags & vehicleSeatFlagMaskFilter) == 0) > 0))
@@ -93,8 +111,13 @@ namespace VehicleGarage
                     ((vehicleSeatFlagBMaskFilterOperator && (x.SeatId.Count(y => (y > 0) && (DBC.VehicleSeat[y].FlagsB & vehicleSeatFlagBMaskFilter) != 0) > 0))
                     || (!vehicleSeatFlagBMaskFilterOperator && (x.SeatId.Count(y => (y > 0) && (DBC.VehicleSeat[y].FlagsB & vehicleSeatFlagBMaskFilter) == 0) > 0))
                     ))
-
-                && (!filterPowerType || x.PowerType == powerTypeFilter))
+                &&
+                (!filterAdvanced1 ||
+                    x.CreateFilter(field1, advancedFilter1))
+                &&
+                (!filterAdvanced2 ||
+                    x.CreateFilter(field2, advancedFilter2))
+                )
             ).ToList();
 
             _lvSearchResults.VirtualListSize = _vehicleResults.Count();

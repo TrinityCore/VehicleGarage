@@ -60,15 +60,19 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._gbSearchBySeat = new System.Windows.Forms.GroupBox();
+            this._labelSeatId = new System.Windows.Forms.Label();
+            this._tbSeatId = new System.Windows.Forms.TextBox();
             this._tcSeats.SuspendLayout();
             this._gbAdvancedFilter.SuspendLayout();
             this._gbVehicleSearch.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this._gbSearchBySeat.SuspendLayout();
             this.SuspendLayout();
             // 
             // _bSearch
             // 
-            this._bSearch.Location = new System.Drawing.Point(559, 401);
+            this._bSearch.Location = new System.Drawing.Point(559, 449);
             this._bSearch.Name = "_bSearch";
             this._bSearch.Size = new System.Drawing.Size(104, 19);
             this._bSearch.TabIndex = 1;
@@ -79,7 +83,7 @@
             // _cbPowerType
             // 
             this._cbPowerType.FormattingEnabled = true;
-            this._cbPowerType.Location = new System.Drawing.Point(120, 122);
+            this._cbPowerType.Location = new System.Drawing.Point(120, 70);
             this._cbPowerType.Name = "_cbPowerType";
             this._cbPowerType.Size = new System.Drawing.Size(99, 21);
             this._cbPowerType.TabIndex = 0;
@@ -95,7 +99,7 @@
             this._lvSearchResults.FullRowSelect = true;
             this._lvSearchResults.GridLines = true;
             this._lvSearchResults.HideSelection = false;
-            this._lvSearchResults.Location = new System.Drawing.Point(370, 276);
+            this._lvSearchResults.Location = new System.Drawing.Point(363, 324);
             this._lvSearchResults.MultiSelect = false;
             this._lvSearchResults.Name = "_lvSearchResults";
             this._lvSearchResults.Size = new System.Drawing.Size(146, 144);
@@ -109,7 +113,7 @@
             // _chVehicleId
             // 
             this._chVehicleId.Text = "VehicleId";
-            this._chVehicleId.Width = 59;
+            this._chVehicleId.Width = 57;
             // 
             // _chUsedCount
             // 
@@ -120,7 +124,7 @@
             // 
             this._rtVehicleInfo.Location = new System.Drawing.Point(20, 43);
             this._rtVehicleInfo.Name = "_rtVehicleInfo";
-            this._rtVehicleInfo.Size = new System.Drawing.Size(323, 377);
+            this._rtVehicleInfo.Size = new System.Drawing.Size(323, 425);
             this._rtVehicleInfo.TabIndex = 8;
             this._rtVehicleInfo.Text = "";
             this._rtVehicleInfo.TextChanged += new System.EventHandler(this._rtVehicleInfo_TextChanged);
@@ -148,7 +152,7 @@
             // _labelPowerType
             // 
             this._labelPowerType.AutoSize = true;
-            this._labelPowerType.Location = new System.Drawing.Point(13, 125);
+            this._labelPowerType.Location = new System.Drawing.Point(13, 78);
             this._labelPowerType.Name = "_labelPowerType";
             this._labelPowerType.Size = new System.Drawing.Size(63, 13);
             this._labelPowerType.TabIndex = 2;
@@ -180,9 +184,9 @@
             this._gbAdvancedFilter.Controls.Add(this._tbAdvancedFilter1);
             this._gbAdvancedFilter.Controls.Add(this._cbAdvancedFilter2);
             this._gbAdvancedFilter.Controls.Add(this._cbAdvancedFilter1);
-            this._gbAdvancedFilter.Location = new System.Drawing.Point(359, 189);
+            this._gbAdvancedFilter.Location = new System.Drawing.Point(363, 237);
             this._gbAdvancedFilter.Name = "_gbAdvancedFilter";
-            this._gbAdvancedFilter.Size = new System.Drawing.Size(304, 81);
+            this._gbAdvancedFilter.Size = new System.Drawing.Size(300, 81);
             this._gbAdvancedFilter.TabIndex = 10;
             this._gbAdvancedFilter.TabStop = false;
             this._gbAdvancedFilter.Text = "Advanced Filter";
@@ -221,12 +225,6 @@
             // 
             // _gbVehicleSearch
             // 
-            this._gbVehicleSearch.Controls.Add(this._cbVehicleSeatFlagsBOperator);
-            this._gbVehicleSearch.Controls.Add(this._tbVehicleSeatFlagsB);
-            this._gbVehicleSearch.Controls.Add(this._labelVehicleSeatFlagsB);
-            this._gbVehicleSearch.Controls.Add(this._tbVehicleSeatFlags);
-            this._gbVehicleSearch.Controls.Add(this._cbVehicleSeatFlagsOperator);
-            this._gbVehicleSearch.Controls.Add(this._labelVehicleSeatFlags);
             this._gbVehicleSearch.Controls.Add(this._cbVehicleFlagsOperator);
             this._gbVehicleSearch.Controls.Add(this._tbVehicleFlags);
             this._gbVehicleSearch.Controls.Add(this._labelVehicleFlags);
@@ -236,14 +234,14 @@
             this._gbVehicleSearch.Controls.Add(this._cbPowerType);
             this._gbVehicleSearch.Location = new System.Drawing.Point(359, 27);
             this._gbVehicleSearch.Name = "_gbVehicleSearch";
-            this._gbVehicleSearch.Size = new System.Drawing.Size(304, 156);
+            this._gbVehicleSearch.Size = new System.Drawing.Size(304, 104);
             this._gbVehicleSearch.TabIndex = 11;
             this._gbVehicleSearch.TabStop = false;
             this._gbVehicleSearch.Text = "Vehicle Search";
             // 
             // _tbVehicleSeatFlags
             // 
-            this._tbVehicleSeatFlags.Location = new System.Drawing.Point(120, 75);
+            this._tbVehicleSeatFlags.Location = new System.Drawing.Point(115, 43);
             this._tbVehicleSeatFlags.Name = "_tbVehicleSeatFlags";
             this._tbVehicleSeatFlags.Size = new System.Drawing.Size(99, 20);
             this._tbVehicleSeatFlags.TabIndex = 10;
@@ -254,7 +252,7 @@
             this._cbVehicleSeatFlagsOperator.Items.AddRange(new object[] {
             "!= 0",
             "== 0"});
-            this._cbVehicleSeatFlagsOperator.Location = new System.Drawing.Point(225, 74);
+            this._cbVehicleSeatFlagsOperator.Location = new System.Drawing.Point(221, 42);
             this._cbVehicleSeatFlagsOperator.Name = "_cbVehicleSeatFlagsOperator";
             this._cbVehicleSeatFlagsOperator.Size = new System.Drawing.Size(69, 21);
             this._cbVehicleSeatFlagsOperator.TabIndex = 9;
@@ -262,7 +260,7 @@
             // _labelVehicleSeatFlags
             // 
             this._labelVehicleSeatFlags.AutoSize = true;
-            this._labelVehicleSeatFlags.Location = new System.Drawing.Point(13, 78);
+            this._labelVehicleSeatFlags.Location = new System.Drawing.Point(8, 47);
             this._labelVehicleSeatFlags.Name = "_labelVehicleSeatFlags";
             this._labelVehicleSeatFlags.Size = new System.Drawing.Size(101, 13);
             this._labelVehicleSeatFlags.TabIndex = 8;
@@ -298,7 +296,7 @@
             // _labelVehicleSeatFlagsB
             // 
             this._labelVehicleSeatFlagsB.AutoSize = true;
-            this._labelVehicleSeatFlagsB.Location = new System.Drawing.Point(13, 102);
+            this._labelVehicleSeatFlagsB.Location = new System.Drawing.Point(9, 72);
             this._labelVehicleSeatFlagsB.Name = "_labelVehicleSeatFlagsB";
             this._labelVehicleSeatFlagsB.Size = new System.Drawing.Size(108, 13);
             this._labelVehicleSeatFlagsB.TabIndex = 11;
@@ -306,7 +304,7 @@
             // 
             // _tbVehicleSeatFlagsB
             // 
-            this._tbVehicleSeatFlagsB.Location = new System.Drawing.Point(120, 99);
+            this._tbVehicleSeatFlagsB.Location = new System.Drawing.Point(114, 69);
             this._tbVehicleSeatFlagsB.Name = "_tbVehicleSeatFlagsB";
             this._tbVehicleSeatFlagsB.Size = new System.Drawing.Size(99, 20);
             this._tbVehicleSeatFlagsB.TabIndex = 12;
@@ -317,7 +315,7 @@
             this._cbVehicleSeatFlagsBOperator.Items.AddRange(new object[] {
             "!= 0",
             "== 0"});
-            this._cbVehicleSeatFlagsBOperator.Location = new System.Drawing.Point(225, 98);
+            this._cbVehicleSeatFlagsBOperator.Location = new System.Drawing.Point(221, 69);
             this._cbVehicleSeatFlagsBOperator.Name = "_cbVehicleSeatFlagsBOperator";
             this._cbVehicleSeatFlagsBOperator.Size = new System.Drawing.Size(69, 21);
             this._cbVehicleSeatFlagsBOperator.TabIndex = 13;
@@ -363,11 +361,45 @@
             this.infoToolStripMenuItem.Text = "About...";
             this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
             // 
+            // _gbSearchBySeat
+            // 
+            this._gbSearchBySeat.Controls.Add(this._tbSeatId);
+            this._gbSearchBySeat.Controls.Add(this._labelSeatId);
+            this._gbSearchBySeat.Controls.Add(this._cbVehicleSeatFlagsBOperator);
+            this._gbSearchBySeat.Controls.Add(this._labelVehicleSeatFlags);
+            this._gbSearchBySeat.Controls.Add(this._tbVehicleSeatFlagsB);
+            this._gbSearchBySeat.Controls.Add(this._tbVehicleSeatFlags);
+            this._gbSearchBySeat.Controls.Add(this._labelVehicleSeatFlagsB);
+            this._gbSearchBySeat.Controls.Add(this._cbVehicleSeatFlagsOperator);
+            this._gbSearchBySeat.Location = new System.Drawing.Point(363, 137);
+            this._gbSearchBySeat.Name = "_gbSearchBySeat";
+            this._gbSearchBySeat.Size = new System.Drawing.Size(300, 94);
+            this._gbSearchBySeat.TabIndex = 13;
+            this._gbSearchBySeat.TabStop = false;
+            this._gbSearchBySeat.Text = "Search by Seat";
+            // 
+            // _labelSeatId
+            // 
+            this._labelSeatId.AutoSize = true;
+            this._labelSeatId.Location = new System.Drawing.Point(9, 24);
+            this._labelSeatId.Name = "_labelSeatId";
+            this._labelSeatId.Size = new System.Drawing.Size(46, 13);
+            this._labelSeatId.TabIndex = 14;
+            this._labelSeatId.Text = "Seat ID:";
+            // 
+            // _tbSeatId
+            // 
+            this._tbSeatId.Location = new System.Drawing.Point(116, 17);
+            this._tbSeatId.Name = "_tbSeatId";
+            this._tbSeatId.Size = new System.Drawing.Size(97, 20);
+            this._tbSeatId.TabIndex = 15;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(676, 440);
+            this.ClientSize = new System.Drawing.Size(676, 479);
+            this.Controls.Add(this._gbSearchBySeat);
             this.Controls.Add(this._gbVehicleSearch);
             this.Controls.Add(this._gbAdvancedFilter);
             this.Controls.Add(this._bSearch);
@@ -375,6 +407,7 @@
             this.Controls.Add(this._rtVehicleInfo);
             this.Controls.Add(this._lvSearchResults);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
@@ -386,6 +419,8 @@
             this._gbVehicleSearch.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this._gbSearchBySeat.ResumeLayout(false);
+            this._gbSearchBySeat.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -424,6 +459,9 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
+        private System.Windows.Forms.GroupBox _gbSearchBySeat;
+        private System.Windows.Forms.TextBox _tbSeatId;
+        private System.Windows.Forms.Label _labelSeatId;
     }
 }
 

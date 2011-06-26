@@ -154,5 +154,32 @@ namespace VehicleGarage.Extensions
             ulong.TryParse(val.ToString(), out num);
             return num;
         }
+
+        /// <summary>
+        /// Compares the text on the partial occurrence of a string and ignore case
+        /// </summary>
+        /// <param name="text">The original text, which will search entry</param>
+        /// <param name="compareText">String which will be matched with the original text</param>
+        /// <returns>Boolean(true or false)</returns>
+        public static bool ContainsText(this string text, string compareText)
+        {
+            return (text.ToUpper().IndexOf(compareText.ToUpper(), StringComparison.CurrentCultureIgnoreCase) != -1);
+        }
+
+        /// <summary>
+        /// Compares the text on the partial occurrence of a string and ignore case
+        /// </summary>
+        /// <param name="text">The original text, which will search entry</param>
+        /// <param name="compareText">Array strings which will be matched with the original text</param>
+        /// <returns>Boolean(true or false)</returns>
+        public static bool ContainsText(this string text, string[] compareText)
+        {
+            foreach (string str in compareText)
+            {
+                if ((text.IndexOf(str, StringComparison.CurrentCultureIgnoreCase) != -1))
+                    return true;
+            }
+            return false;
+        }
     }
 }

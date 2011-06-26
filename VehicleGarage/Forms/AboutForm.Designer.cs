@@ -96,7 +96,7 @@
             this.Controls.Add(this._gbVersion);
             this.Controls.Add(this._buttonOk);
             this.Controls.Add(this._gbAcknowledgements);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AboutForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
