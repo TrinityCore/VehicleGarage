@@ -1,0 +1,8 @@
+Step 1: Build using VehicleGarage.sln
+NOTE: If you do not have Code Contracts installed you should build in RELEASE mode only.
+
+Step 2: Edit VehicleGarage.exe.config in the binary output folder. Enter your MySQL details and path to DBC files accordingly.
+
+Step 3: Place the DBC files "Vehicle.dbc", "VehicleSeat.dbc", "VehicleUIIndicator.dbc", "VehicleUIIndSeat.dbc" in the folder named DBC at the path you specified at step 2.
+
+Step 4: Run VehicleGarage.exe
