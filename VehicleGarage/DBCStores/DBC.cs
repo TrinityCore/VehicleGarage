@@ -25,7 +25,7 @@ namespace VehicleGarage.DBCStores
         public static Dictionary<uint, VehicleUIIndicatorEntry> VehicleUIIndicator;
         public static Dictionary<uint, VehicleUIIndSeatEntry> VehicleUIIndSeat;
 
-        public static Dictionary<uint, string> VehicleStrings;
+        public static Dictionary<uint, string> VehicleStrings = new Dictionary<uint, string>();
     }
 
 }

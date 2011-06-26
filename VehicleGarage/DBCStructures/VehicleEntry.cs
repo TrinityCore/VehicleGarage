@@ -46,10 +46,25 @@ namespace VehicleGarage.DBCStructures
         public int Unk2;        // New in 3.1 - Always 0
 
         
-        public string MissleTargetArcTexture { get { return DBC.VehicleStrings[_missleTargetArcTexture]; }}
-        public string MissleTargetImpactTexture { get { return DBC.VehicleStrings[_missleTargetImpactTexture]; }}
-        public string MissleTargetImpactModel1 { get { return DBC.VehicleStrings[_missleTargetImpactModel1]; }}
-        public string MissleTargetImpactModel2 { get { return DBC.VehicleStrings[_missleTargetImpactModel2]; }}
+        public string MissleTargetArcTexture
+        {
+            get { return DBC.VehicleStrings[_missleTargetArcTexture]; }
+        }
+
+        public string MissleTargetImpactTexture
+        {
+            get { return DBC.VehicleStrings[_missleTargetImpactTexture]; }
+        }
+
+        public string MissleTargetImpactModel1
+        {
+            get { return DBC.VehicleStrings[_missleTargetImpactModel1]; }
+        }
+
+        public string MissleTargetImpactModel2
+        {
+            get { return DBC.VehicleStrings[_missleTargetImpactModel2]; }
+        }
 
     }
 }

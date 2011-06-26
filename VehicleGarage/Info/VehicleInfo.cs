@@ -45,7 +45,37 @@ namespace VehicleGarage.Info
             _rtb.Clear();
             _rtb.SetBold();
             _rtb.AppendFormatLine("Vehicle ID: {0}", _vehicle.Id);
+            _rtb.AppendFormatLine("Locomotion Type: {0}", _vehicle.LocomotionType);
+            _rtb.AppendFormatLine("Seat Indicator Type: {0}", _vehicle.SeatIndicatorType);
+            _rtb.AppendFormatLine("Power Type: {0}", _vehicle.PowerType);
+            _rtb.AppendFormatLine("Turn Speed: {0}", _vehicle.TurnSpeed);
+            _rtb.AppendFormatLine("Pitch Speed: {0}", _vehicle.PitchSpeed);
+            _rtb.AppendFormatLine("Pitch Min: {0}", _vehicle.PitchMin);
+            _rtb.AppendFormatLine("Pitch Max: {0}", _vehicle.PitchMax);
+            _rtb.AppendFormatLine("Pitch Offset: {0}", _vehicle.PitchOffset);
+            _rtb.AppendFormatLine("Mouselook Offset Pitch: {0}", _vehicle.MouseLookOffsetPitch);
+            _rtb.AppendFormatLine("Camera Fade Distance Scalar Min: {0}", _vehicle.CameraFadeDistScalarMin);
+            _rtb.AppendFormatLine("Camera Fade Distance Scalar Max: {0}", _vehicle.CameraFadeDistScalarMax);
+            _rtb.AppendFormatLine("Camera Yaw Offset: {0}", _vehicle.CameraYawOffset);
+            _rtb.AppendFormatLine("Facing Limit Right: {0}", _vehicle.FacingLimitRight);
+            _rtb.AppendFormatLine("Facing Limit Left: {0}", _vehicle.FacingLimitLeft);
+            _rtb.AppendFormatLine("Missle Target Turn Lingering: {0}", _vehicle.MissleTargetTurnLingering);
+            _rtb.AppendFormatLine("Missle Target Pitch Lingering: {0}", _vehicle.MissleTargetPitchLingering);
+            _rtb.AppendFormatLine("Missle Target Mouse Lingering: {0}", _vehicle.MissleTargetMouseLingering);
+            _rtb.AppendFormatLine("Missle Target End Opacity: {0}", _vehicle.MissleTargetEndOpacity);
+            _rtb.AppendFormatLine("Missle Target Arc Speed: {0}", _vehicle.MissleTargetArcSpeed);
+            _rtb.AppendFormatLine("Missle Target Arc Repeat: {0}", _vehicle.MissleTargetArcRepeat);
+            _rtb.AppendFormatLine("Missle Target Arc Width: {0}", _vehicle.MissleTargetArcWidth);
+            _rtb.AppendFormatLine("Missle Target Impact Radius 1: {0}", _vehicle.MissleTargetImpactRadius[0]);
+            _rtb.AppendFormatLine("Missle Target Impact Radius 2: {0}", _vehicle.MissleTargetImpactRadius[1]);
+            _rtb.AppendFormatLine("Missle Target Impact Texture Radius: {0}", _vehicle.MissleTargetImpactTexRadius);
+            _rtb.AppendFormatLine("Missle Target Arc Texture: {0}", _vehicle.MissleTargetArcTexture);
+            _rtb.AppendFormatLine("Missle Target Impact Model 1: {0}", _vehicle.MissleTargetImpactModel1);
+            _rtb.AppendFormatLine("Missle Target Impact Model 2: {0}", _vehicle.MissleTargetImpactModel2);
+            _rtb.AppendFormatLine("Unk1: {0}", _vehicle.Unk1);
+            _rtb.AppendFormatLine("Unk2: {0}", _vehicle.Unk2);
             _rtb.AppendLine();
+
             _rtb.SetBold();
             _rtb.AppendFormatLine("Has VehiceFlags:");
             _rtb.SetDefaultStyle();
@@ -63,7 +93,6 @@ namespace VehicleGarage.Info
             {
                 _rtb.AppendLine();
                 _rtb.AppendFormatLine("==========================");
-                _rtb.SetBold();
                 _rtb.AppendFormatLine("{0} - {1}", c.Id, c.Name);
                 _rtb.SetDefaultStyle();
                 if (((NPCFlags)c.NPCFlag).HasFlag(NPCFlags.Spellclick))
@@ -72,9 +101,8 @@ namespace VehicleGarage.Info
                 if (SQL.SpellClick.TryGetValue(c.Id, out spellClickSpells))
                     foreach (var spell in spellClickSpells)
                         _rtb.AppendFormatLine("    Has spellclick spell {0}", spell);
-                _rtb.AppendLine();
-                _rtb.AppendFormatLineIfNotNull("AIName: \"{0}\"", c.AIName);
-                _rtb.AppendFormatLineIfNotNull("ScriptName: \"{0}\"", c.ScriptName);
+                _rtb.AppendFormatLineIfNotNull("    AIName: \"{0}\"", c.AIName);
+                _rtb.AppendFormatLineIfNotNull("    ScriptName: \"{0}\"", c.ScriptName);
             }
 
         }

@@ -99,7 +99,7 @@ namespace VehicleGarage
 
             _lvSearchResults.VirtualListSize = _vehicleResults.Count();
             if (_lvSearchResults.SelectedIndices.Count > 0)
-                _lvSearchResults.Items[_lvSearchResults.SelectedIndices[0]].Selected = true;
+                _lvSearchResults.Items[_lvSearchResults.SelectedIndices[0]].Selected = false;
 
             _lvSearchResults.Focus();
         }
