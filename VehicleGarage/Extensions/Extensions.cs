@@ -93,6 +93,16 @@ namespace VehicleGarage.Extensions
             cb.ValueMember = "ID";
         }
 
+        public static byte ToByte(this Object val)
+        {
+            if (val == null)
+                return 0;
+
+            byte num;
+            byte.TryParse(val.ToString(), out num);
+            return num;
+        }
+
         public static uint ToUInt32(this Object val)
         {
             if (val == null)
@@ -174,12 +184,7 @@ namespace VehicleGarage.Extensions
         /// <returns>Boolean(true or false)</returns>
         public static bool ContainsText(this string text, string[] compareText)
         {
-            foreach (string str in compareText)
-            {
-                if ((text.IndexOf(str, StringComparison.CurrentCultureIgnoreCase) != -1))
-                    return true;
-            }
-            return false;
+            return compareText.Any(str => (text.IndexOf(str, StringComparison.CurrentCultureIgnoreCase) != -1));
         }
     }
 }

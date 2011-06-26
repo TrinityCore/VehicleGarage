@@ -22,6 +22,7 @@ namespace VehicleGarage
 
             SQL.CreatureTemplate = SQLReader.LoadCreatureTemplates();
             SQL.SpellClick = SQLReader.LoadSpellClick();
+            SQL.Accessories = SQLReader.LoadVehicleAccessories();
         }
     }
 }

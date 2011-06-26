@@ -14,5 +14,6 @@ namespace VehicleGarage.SQLStores
         public static Dictionary<int, CreatureTemplate> CreatureTemplate;
 
         public static Dictionary<uint, List<int>> SpellClick;
+        public static Dictionary<uint, List<VehicleTemplateAccessory>> Accessories;
     }
 }

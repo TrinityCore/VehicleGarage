@@ -8,6 +8,7 @@ using VehicleGarage.DBCStructures;
 using VehicleGarage.Extensions;
 using VehicleGarage.SQLStores;
 using VehicleGarage.DBCStores;
+using VehicleGarage.SQLStructures;
 
 namespace VehicleGarage.Info
 {
@@ -91,18 +92,26 @@ namespace VehicleGarage.Info
             foreach (var c in
                 SQL.CreatureTemplate.Where(x => x.Value.VehicleId == _vehicle.Id).Select(creature => creature.Value))
             {
-                _rtb.AppendLine();
-                _rtb.AppendFormatLine("==========================");
                 _rtb.AppendFormatLine("{0} - {1}", c.Id, c.Name);
                 _rtb.SetDefaultStyle();
                 if (((NPCFlags)c.NPCFlag).HasFlag(NPCFlags.Spellclick))
                     _rtb.AppendLine("    Has spellclick NPC flag");
+
                 List<int> spellClickSpells;
                 if (SQL.SpellClick.TryGetValue(c.Id, out spellClickSpells))
                     foreach (var spell in spellClickSpells)
                         _rtb.AppendFormatLine("    Has spellclick spell {0}", spell);
+
+                List<VehicleTemplateAccessory> accessories;
+                if (SQL.Accessories.TryGetValue(c.Id, out accessories))
+                    foreach (var accessory in accessories)
+                        _rtb.AppendFormatLine("    Has accessory entry {0} on seat {1}", accessory.AccessoryEntry, accessory.SeatId);
+
                 _rtb.AppendFormatLineIfNotNull("    AIName: \"{0}\"", c.AIName);
                 _rtb.AppendFormatLineIfNotNull("    ScriptName: \"{0}\"", c.ScriptName);
+
+                _rtb.AppendLine();
+                _rtb.SetDefaultStyle();
             }
 
         }

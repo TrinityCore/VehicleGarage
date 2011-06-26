@@ -92,5 +92,27 @@ namespace TestProject1
             Assert.AreEqual(actual.Count(x => x.Value.VehicleId == 0), 0);
             Assert.AreEqual(actual.Max(x => x.Value.Id), 40725u);
         }
+
+        /// <summary>
+        ///A test for LoadVehicleAccessories
+        ///</summary>
+        [TestMethod()]
+        public void LoadVehicleAccessoriesTest()
+        {
+            var actual = SQLReader.LoadVehicleAccessories();
+            
+            List<VehicleTemplateAccessory> accessories;
+            if (actual.TryGetValue(36678, out accessories))
+                    foreach (var accessory in accessories)
+                        switch (accessory.AccessoryEntry)
+                        {
+                            case 38309:
+                                Assert.AreEqual(0u, accessory.SeatId);
+                                break;
+                            case 38308:
+                                Assert.AreEqual(1u, accessory.SeatId);
+                                break;
+                        }
+        }
     }
 }

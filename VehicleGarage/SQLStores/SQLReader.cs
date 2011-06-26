@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Windows.Forms;
 using VehicleGarage.Extensions;
 using VehicleGarage.Properties;
 using VehicleGarage.SQLStructures;
@@ -71,6 +73,39 @@ namespace VehicleGarage.SQLStores
                         if (!dict.ContainsKey(npc))
                             dict.Add(npc, new List<int>());
                         dict[npc].Add(spell);
+                    }
+                }
+            }
+
+            return dict;
+        }
+
+        public static Dictionary<uint, List<VehicleTemplateAccessory>> LoadVehicleAccessories()
+        {
+            var dict = new Dictionary<uint, List<VehicleTemplateAccessory>>();
+
+            using (var conn = new MySqlConnection(ConnectionString))
+            {
+                // Have to cast to UINT because tinyint(1) is treated like bool
+                var command = new MySqlCommand("SELECT entry,accessory_entry, CAST(seat_id AS UNSIGNED INTEGER) FROM vehicle_template_accessory",
+                                               conn);
+                conn.Open();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var vehicle = reader[0].ToUInt32();
+
+                        var accessory = new VehicleTemplateAccessory
+                                            {
+                                                AccessoryEntry = reader[1].ToUInt32(),
+                                                SeatId = reader[2].ToByte(),
+                                            };
+                        
+                        if (!dict.ContainsKey(vehicle))
+                            dict.Add(vehicle, new List<VehicleTemplateAccessory>());
+                        dict[vehicle].Add(accessory);
                     }
                 }
             }
