@@ -10,7 +10,7 @@ namespace VehicleGarage.DBCStores
 {
     public static class DBCReader
     {
-        public static unsafe Dictionary<uint, T> ReadDBC<T>(Dictionary<uint, string> strDict) where T : struct
+        public static /*unsafe*/ Dictionary<uint, T> ReadDBC<T>(Dictionary<uint, string> strDict) where T : struct
         {
             Contract.Requires(DBC.DBCPath != String.Empty);
             Contract.Requires(DBC.DBCPath != null);

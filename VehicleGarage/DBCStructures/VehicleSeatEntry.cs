@@ -1,10 +1,12 @@
 ﻿
+using System;
+
 namespace VehicleGarage.DBCStructures
 {
     public struct VehicleSeatEntry
     {
         public int Id;
-        public int Flags;
+        public VehicleSeatFlags Flags;
         public int AttachmentId;
         public float AttachmentOffsetX;
         public float AttachmentOffsetY;

@@ -103,8 +103,8 @@ namespace VehicleGarage
                     x.SeatId.Count(y => y == seatIdFilter) > 0)
                 &&
                 (!filterVehicleSeatFlagMask ||
-                    ((vehicleSeatFlagMaskFilterOperator && (x.SeatId.Count(y => (y > 0) && (DBC.VehicleSeat[y].Flags & vehicleSeatFlagMaskFilter) != 0) > 0))
-                    || (!vehicleSeatFlagMaskFilterOperator && (x.SeatId.Count(y => (y > 0) && (DBC.VehicleSeat[y].Flags & vehicleSeatFlagMaskFilter) == 0) > 0))
+                    ((vehicleSeatFlagMaskFilterOperator && (x.SeatId.Count(y => (y > 0) && (DBC.VehicleSeat[y].Flags.HasFlag((VehicleSeatFlags)vehicleSeatFlagMaskFilter))) > 0))
+                    || (!vehicleSeatFlagMaskFilterOperator && (x.SeatId.Count(y => (y > 0) && (DBC.VehicleSeat[y].Flags.HasFlag((VehicleSeatFlags)vehicleSeatFlagMaskFilter))) > 0))
                     ))
                 &&
                 (!filterVehicleSeatFlagBMask ||

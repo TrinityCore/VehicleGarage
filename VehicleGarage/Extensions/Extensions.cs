@@ -36,7 +36,7 @@ namespace VehicleGarage.Extensions
         /// <typeparam name="T">Struct type.</typeparam>
         /// <param name="reader">Stream to read from.</param>
         /// <returns>Resulting struct.</returns>
-        public static unsafe T ReadStruct<T>(this BinaryReader reader) where T : struct
+        public static /*unsafe*/ T ReadStruct<T>(this BinaryReader reader) where T : struct
         {
             byte[] rawData = reader.ReadBytes(Marshal.SizeOf(typeof(T)));
 

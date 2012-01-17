@@ -102,10 +102,53 @@ namespace VehicleGarage.Info
                     foreach (var spell in spellClickSpells)
                         _rtb.AppendFormatLine("    Has spellclick spell {0}", spell);
 
+                var vehicleSeats = new LinkedList<VehicleSeatEntry>();
+                foreach (var s in Seats)
+                    vehicleSeats.AddLast(s.Seat);
+                
                 List<VehicleTemplateAccessory> accessories;
                 if (SQL.Accessories.TryGetValue(c.Id, out accessories))
+                {
                     foreach (var accessory in accessories)
-                        _rtb.AppendFormatLine("    Has accessory entry {0} on seat {1}", accessory.AccessoryEntry, accessory.SeatId);
+                    {
+                        _rtb.AppendFormatLine("    Has accessory entry {0} on seat {1}", accessory.AccessoryEntry,
+                                              accessory.SeatId);
+                        CreatureTemplate template;
+                        if (!SQL.CreatureTemplate.TryGetValue((int) accessory.AccessoryEntry, out template)) 
+                            continue;
+
+                        if (template.VehicleId == 0) 
+                            continue;
+
+                        _rtb.AppendFormatLine("    Accessory is a vehicle.");
+
+                        var val = vehicleSeats.Find(
+                            Seats.Find(x => x.Seat.Id == _vehicle.SeatId[accessory.SeatId]).Seat
+                                );
+                        
+                        VehicleEntry vehicle;
+                        if (!DBC.Vehicle.TryGetValue(template.VehicleId, out vehicle))
+                            continue;
+
+                        foreach (var vs in vehicle.SeatId)
+                        {
+                            VehicleSeatEntry vsE;
+                            if (DBC.VehicleSeat.TryGetValue(vs, out vsE))
+                                if (vsE.Flags.HasFlag(VehicleSeatFlags.CanControl))
+                                    vehicleSeats.AddAfter(val, vsE);
+                        }
+
+                        vehicleSeats.Remove(val);
+                    }
+
+                    _rtb.AppendLine();
+                    _rtb.SetBold();
+                    _rtb.AppendFormatLine("The following seats can be cycled trough by the player (recursive cycling included)");
+                    foreach (var vs in vehicleSeats)
+                        _rtb.AppendFormat("{0}->", vs.Id);
+                    _rtb.SetDefaultStyle();
+                    _rtb.AppendLine();
+                }
 
                 _rtb.AppendFormatLineIfNotNull("    AIName: \"{0}\"", c.AIName);
                 _rtb.AppendFormatLineIfNotNull("    ScriptName: \"{0}\"", c.ScriptName);
