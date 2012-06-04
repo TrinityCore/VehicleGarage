@@ -1,16 +1,12 @@
-﻿using System.Diagnostics.Contracts;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows.Forms;
 using VehicleGarage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using VehicleGarage.DBCStores;
-using VehicleGarage.DBCStructures;
+using VehicleGarage.Forms;
 
 namespace TestProject1
 {
-    
-    
     /// <summary>
     ///This is a test class for FormMainTest and is intended
     ///to contain all FormMainTest Unit Tests
@@ -18,25 +14,11 @@ namespace TestProject1
     [TestClass()]
     public class FormMainTest
     {
-
-
-        private TestContext testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         // 
@@ -68,7 +50,6 @@ namespace TestProject1
         //
         #endregion
 
-
         /// <summary>
         ///A test for _lvSearchResults_SelectedIndexChanged
         ///</summary>
@@ -76,7 +57,7 @@ namespace TestProject1
         [DeploymentItem("VehicleGarage.exe")]
         public void _lvSearchResults_SelectedIndexChangedTest()
         {
-            FormMain_Accessor target = new FormMain_Accessor(); // TODO: Initialize to an appropriate value
+            var target = new FormMain_Accessor(); // TODO: Initialize to an appropriate value
             object sender = null; // TODO: Initialize to an appropriate value
             EventArgs e = null; // TODO: Initialize to an appropriate value
             target._lvSearchResults_SelectedIndexChanged(sender, e);

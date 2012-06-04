@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using VehicleGarage.DBCStructures;
 using VehicleGarage.Extensions;
 
@@ -68,18 +64,19 @@ namespace VehicleGarage.Info
             _rtb.AppendFormatLine("Vehicle Enter UI Sound ID: {0}", Seat.EnterUiSoundId);
             _rtb.AppendFormatLine("Vehicle Exit UI Sound ID: {0}", Seat.ExitUiSoundId);
             _rtb.AppendFormatLine("Vehicle Skin: {0}", Seat.Skin);
-            _rtb.AppendFormatLine("Unk1: {0}", Seat.Unk1);
-            _rtb.AppendFormatLine("Unk2: {0}", Seat.Unk2);
-            _rtb.AppendFormatLine("Unk3: {0}", Seat.Unk3);
-            _rtb.AppendFormatLine("Unk4: {0}", Seat.Unk4);
-            _rtb.AppendFormatLine("Unk5: {0}", Seat.Unk5);
-            _rtb.AppendFormatLine("Unk6: {0}", Seat.Unk6);
-            _rtb.AppendFormatLine("Unk7: {0}", Seat.Unk7);
-            _rtb.AppendFormatLine("Unk8: {0}", Seat.Unk8);
-            _rtb.AppendFormatLine("Unk9: {0}", Seat.Unk9);
-            _rtb.AppendFormatLine("Unk10: {0}", Seat.Unk10);
-            _rtb.AppendFormatLine("Unk11: {0}", Seat.Unk11);
-            _rtb.AppendFormatLine("Unk12: {0}", Seat.Unk12);
+            _rtb.AppendFormatLine("Camera Entering Delay: {0}", Seat.CameraEnteringDelay);
+            _rtb.AppendFormatLine("Camera Entering Duration: {0}", Seat.CameraEnteringDuration);
+            _rtb.AppendFormatLine("Camera Exiting Delay: {0}", Seat.CameraExitingDelay);
+            _rtb.AppendFormatLine("Camera Exiting Duration: {0}", Seat.CameraExitingDuration);
+            _rtb.AppendFormatLine("Camera Offset X: {0}", Seat.CameraOffsetX);
+            _rtb.AppendFormatLine("Camera Offset Y: {0}", Seat.CameraOffsetY);
+            _rtb.AppendFormatLine("Camera Offset Z: {0}", Seat.CameraOffsetZ);
+            _rtb.AppendFormatLine("Camera Pos Chase Rate: {0}", Seat.CameraPosChaseRate);
+            _rtb.AppendFormatLine("Camera Facing Chase Rate: {0}", Seat.CameraFacingChaseRate);
+            _rtb.AppendFormatLine("Camera Entering Zoom: {0}", Seat.CameraEnteringZoom);
+            _rtb.AppendFormatLine("Camera Seat Zoom Min: {0}", Seat.CameraSeatZoomMin);
+            _rtb.AppendFormatLine("Camera Seat Zoom Max: {0}", Seat.CameraSeatZoomMax);
+
             _rtb.AppendLine();
 
             _rtb.SetBold();

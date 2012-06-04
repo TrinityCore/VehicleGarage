@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
+﻿using System.Runtime.InteropServices;
 using VehicleGarage.DBCStores;
 
 namespace VehicleGarage.DBCStructures
@@ -42,10 +38,9 @@ namespace VehicleGarage.DBCStructures
         public float MissleTargetImpactTexRadius;
         public int SeatIndicatorType;
         public int PowerType;
-        public int Unk1;        // New in 3.1 - Either -1 or 0 (most common)
-        public int Unk2;        // New in 3.1 - Always 0
+        public int Unk1;        // New in 3.1 - Either -1 or 0 (most common) - PowerType[1]?
+        public int Unk2;        // New in 3.1 - Always 0 - PowerType[2]?
 
-        
         public string MissleTargetArcTexture
         {
             get { return DBC.VehicleStrings[_missleTargetArcTexture]; }

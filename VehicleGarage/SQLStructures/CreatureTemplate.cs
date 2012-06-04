@@ -1,5 +1,4 @@
-﻿
-namespace VehicleGarage.SQLStructures
+﻿namespace VehicleGarage.SQLStructures
 {
     public struct CreatureTemplate
     {

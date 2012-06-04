@@ -1,7 +1,4 @@
-﻿
-using System;
-
-namespace VehicleGarage.DBCStructures
+﻿namespace VehicleGarage.DBCStructures
 {
     public struct VehicleSeatEntry
     {
@@ -51,18 +48,17 @@ namespace VehicleGarage.DBCStructures
         public int ExitUiSoundId;
         public int Skin;
         public int FlagsB;
-        public float Unk1;  // added in 3.1
-        public float Unk2;  // added in 3.1
-        public float Unk3;  // added in 3.1
-        public float Unk4;  // added in 3.1
-        public float Unk5;  // added in 3.1
-        public float Unk6;  // added in 3.1
-        public float Unk7;  // added in 3.1
-        public float Unk8;  // added in 3.1
-        public float Unk9;  // added in 3.1
-        public float Unk10; // added in 3.1
-        public float Unk11; // added in 3.1
-        public float Unk12; // added in 3.1
+        public float CameraEnteringDelay;
+        public float CameraEnteringDuration;
+        public float CameraExitingDelay;
+        public float CameraExitingDuration;
+        public float CameraOffsetX;
+        public float CameraOffsetY;
+        public float CameraOffsetZ;
+        public float CameraPosChaseRate;
+        public float CameraFacingChaseRate;
+        public float CameraEnteringZoom;
+        public float CameraSeatZoomMin;
+        public float CameraSeatZoomMax;
     }
-
 }

@@ -10,13 +10,13 @@ namespace VehicleGarage.DBCStores
 {
     public static class DBCReader
     {
-        public static /*unsafe*/ Dictionary<uint, T> ReadDBC<T>(Dictionary<uint, string> strDict) where T : struct
+        public static Dictionary<uint, T> ReadDBC<T>(Dictionary<uint, string> strDict) where T : struct
         {
             Contract.Requires(DBC.DBCPath != String.Empty);
             Contract.Requires(DBC.DBCPath != null);
 
             var dict = new Dictionary<uint, T>();
-            string fileName = Path.Combine(DBC.DBCPath, typeof(T).Name + ".dbc").Replace("Entry", String.Empty);
+            var fileName = Path.Combine(DBC.DBCPath, typeof(T).Name + ".dbc").Replace("Entry", String.Empty);
 
             using (var reader = new BinaryReader(new FileStream(fileName, FileMode.Open, FileAccess.Read), Encoding.UTF8))
             {
@@ -38,9 +38,9 @@ namespace VehicleGarage.DBCStores
                     var key = reader.ReadUInt32();
                     reader.BaseStream.Position -= 4;
 
-                    var T_entry = reader.ReadStruct<T>();
+                    var entry = reader.ReadStruct<T>();
 
-                    dict.Add(key, T_entry);
+                    dict.Add(key, entry);
                 }
 
                 // read dbc strings

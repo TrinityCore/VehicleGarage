@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-
+﻿using System.Runtime.InteropServices;
 
 namespace VehicleGarage.DBCStores
 {
@@ -22,12 +17,12 @@ namespace VehicleGarage.DBCStores
 
         public long DataSize
         {
-            get { return (long)(RecordsCount * RecordSize); }
+            get { return RecordsCount * RecordSize; }
         }
 
         public long StartStringPosition
         {
-            get { return DataSize + (long)Marshal.SizeOf(typeof(DbcHeader)); }
+            get { return DataSize + Marshal.SizeOf(typeof(DbcHeader)); }
         }
     };
 }

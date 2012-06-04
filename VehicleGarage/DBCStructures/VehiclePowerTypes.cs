@@ -1,5 +1,4 @@
-﻿
-namespace VehicleGarage.DBCStructures
+﻿namespace VehicleGarage.DBCStructures
 {
     public enum VehiclePowerTypes
     {

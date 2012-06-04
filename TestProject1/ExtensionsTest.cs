@@ -4,8 +4,6 @@ using System;
 
 namespace TestProject1
 {
-    
-    
     /// <summary>
     ///This is a test class for ExtensionsTest and is intended
     ///to contain all ExtensionsTest Unit Tests
@@ -13,8 +11,6 @@ namespace TestProject1
     [TestClass()]
     public class ExtensionsTest
     {
-
-
         private TestContext testContextInstance;
 
         /// <summary>

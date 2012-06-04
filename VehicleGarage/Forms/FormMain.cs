@@ -1,22 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows.Forms;
 using VehicleGarage.Extensions;
 using VehicleGarage.DBCStructures;
 using VehicleGarage.DBCStores;
-using VehicleGarage.Forms;
 using VehicleGarage.Info;
 using VehicleGarage.SQLStores;
 using System.Diagnostics.Contracts;
-using VehicleGarage.SQLStructures;
 
-namespace VehicleGarage
+namespace VehicleGarage.Forms
 {
     public partial class FormMain : Form
     {

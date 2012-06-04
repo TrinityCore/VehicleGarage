@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using VehicleGarage.DBCStructures;
 using VehicleGarage.Extensions;
