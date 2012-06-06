@@ -41,7 +41,7 @@ namespace VehicleGarage.Extensions
             byte[] rawData = reader.ReadBytes(Marshal.SizeOf(typeof(T)));
 
             GCHandle handle = GCHandle.Alloc(rawData, GCHandleType.Pinned);
-            T returnObject = (T)Marshal.PtrToStructure(handle.AddrOfPinnedObject(), typeof(T));
+            var returnObject = (T)Marshal.PtrToStructure(handle.AddrOfPinnedObject(), typeof(T));
 
             handle.Free();
 
@@ -50,47 +50,51 @@ namespace VehicleGarage.Extensions
 
         public static void SetEnumValues<T>(this ComboBox cb, string NoValue)
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("ID");
-            dt.Columns.Add("NAME");
-
-            dt.Rows.Add(new Object[] { -1, NoValue });
-
-            foreach (var str in Enum.GetValues(typeof(T)))
+            using (var dt = new DataTable())
             {
-                dt.Rows.Add(new Object[] { (int)str, "(" + ((int)str).ToString("000") + ") " + str });
-            }
+                dt.Columns.Add("ID");
+                dt.Columns.Add("NAME");
 
-            cb.DataSource = dt;
-            cb.DisplayMember = "NAME";
-            cb.ValueMember = "ID";
+                dt.Rows.Add(new Object[] {-1, NoValue});
+
+                foreach (var str in Enum.GetValues(typeof (T)))
+                {
+                    dt.Rows.Add(new Object[] {(int) str, "(" + ((int) str).ToString("000") + ") " + str});
+                }
+
+                cb.DataSource = dt;
+                cb.DisplayMember = "NAME";
+                cb.ValueMember = "ID";
+            }
         }
 
         public static void SetStructFields<T>(this ComboBox cb)
         {
             cb.Items.Clear();
 
-            var dt = new DataTable();
-            dt.Columns.Add("ID", typeof(MemberInfo));
-            dt.Columns.Add("NAME", typeof(String));
-
-            var type = typeof(T).GetMembers();
-            var i = 0;
-            foreach (var str in type)
+            using (var dt = new DataTable())
             {
-                if (!(str is FieldInfo) && !(str is PropertyInfo)) 
-                    continue;
+                dt.Columns.Add("ID", typeof (MemberInfo));
+                dt.Columns.Add("NAME", typeof (String));
 
-                var dr = dt.NewRow();
-                dr["ID"] = str;
-                dr["NAME"] = String.Format("({0:000}) {1}", i, str.Name);
-                dt.Rows.Add(dr);
-                i++;
+                var type = typeof (T).GetMembers();
+                var i = 0;
+                foreach (var str in type)
+                {
+                    if (!(str is FieldInfo) && !(str is PropertyInfo))
+                        continue;
+
+                    var dr = dt.NewRow();
+                    dr["ID"] = str;
+                    dr["NAME"] = String.Format("({0:000}) {1}", i, str.Name);
+                    dt.Rows.Add(dr);
+                    i++;
+                }
+
+                cb.DataSource = dt;
+                cb.DisplayMember = "NAME";
+                cb.ValueMember = "ID";
             }
-
-            cb.DataSource = dt;
-            cb.DisplayMember = "NAME";
-            cb.ValueMember = "ID";
         }
 
         public static byte ToByte(this Object val)

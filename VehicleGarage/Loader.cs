@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Text;
 using VehicleGarage.SQLStores;
 using VehicleGarage.DBCStores;
 using VehicleGarage.DBCStructures;
-using VehicleGarage.SQLStructures;
 
 namespace VehicleGarage
 {
@@ -20,9 +17,17 @@ namespace VehicleGarage
             DBC.VehicleUIIndicator = DBCReader.ReadDBC<VehicleUIIndicatorEntry>(null);
             DBC.VehicleUIIndSeat = DBCReader.ReadDBC<VehicleUIIndSeatEntry>(null);
 
-            SQL.CreatureTemplate = SQLReader.LoadCreatureTemplates();
-            SQL.SpellClick = SQLReader.LoadSpellClick();
-            SQL.Accessories = SQLReader.LoadVehicleAccessories();
+            try
+            {
+                SQLReader.Connect();
+                SQL.CreatureTemplate = SQLReader.LoadCreatureTemplates();
+                SQL.SpellClick = SQLReader.LoadSpellClick();
+                SQL.Accessories = SQLReader.LoadVehicleAccessories();
+            }
+            finally
+            {
+                SQLReader.Disconnect();
+            }
         }
     }
 }

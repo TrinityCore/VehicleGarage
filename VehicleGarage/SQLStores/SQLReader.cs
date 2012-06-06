@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using VehicleGarage.Extensions;
 using VehicleGarage.Properties;
 using VehicleGarage.SQLStructures;
@@ -9,41 +10,49 @@ namespace VehicleGarage.SQLStores
 {
     public static class SQLReader
     {
+        private static MySqlConnection _conn;
+
+        public static void Connect()
+        {
+            _conn = new MySqlConnection(ConnectionString);
+            _conn.Open();
+            if (_conn.State != ConnectionState.Open)
+                throw new Exception();
+        }
+
+        public static void Disconnect()
+        {
+            if (_conn != null)
+                _conn.Close();
+        }
+
         public static Dictionary<int, CreatureTemplate> LoadCreatureTemplates()
         {
             var dict = new Dictionary<int, CreatureTemplate>();
 
-            using (var conn = new MySqlConnection(ConnectionString))
+            using (var command = new MySqlCommand("SELECT entry,name,npcflag,unit_flags,dynamicflags,VehicleId,AIName,InhabitType,ScriptName,WDBVerified FROM creature_template WHERE VehicleId <>0", _conn))
             {
-                var command =
-                    new MySqlCommand(
-                        "SELECT entry,name,npcflag,unit_flags,dynamicflags,VehicleId,AIName,InhabitType,ScriptName,WDBVerified FROM creature_template WHERE VehicleId <>0",
-                        conn);
-                
-                conn.Open();
-
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         var creatureTemplate = new CreatureTemplate
-                                                   {
-                                                       Id = reader[0].ToUInt32(),
-                                                       Name = reader[1].ToString(),
-                                                       NPCFlag = reader[2].ToUInt32(),
-                                                       UnitFlags = reader[3].ToUInt32(),
-                                                       DynamicFlags = reader[4].ToUInt32(),
-                                                       VehicleId = reader[5].ToUInt32(),
-                                                       AIName = reader[6].ToString(),
-                                                       InhabitType = reader[7].ToUInt32(),
-                                                       ScriptName = reader[8].ToString(),
-                                                       WDBVerified = reader[9].ToUInt32()
-                                                   };
+                                                    {
+                                                        Id = reader[0].ToUInt32(),
+                                                        Name = reader[1].ToString(),
+                                                        NPCFlag = reader[2].ToUInt32(),
+                                                        UnitFlags = reader[3].ToUInt32(),
+                                                        DynamicFlags = reader[4].ToUInt32(),
+                                                        VehicleId = reader[5].ToUInt32(),
+                                                        AIName = reader[6].ToString(),
+                                                        InhabitType = reader[7].ToUInt32(),
+                                                        ScriptName = reader[8].ToString(),
+                                                        WDBVerified = reader[9].ToUInt32()
+                                                    };
 
                         dict[creatureTemplate.Id.ToInt32()] = creatureTemplate;
                     }
                 }
-
             }
 
             return dict;
@@ -53,15 +62,8 @@ namespace VehicleGarage.SQLStores
         {
             var dict = new Dictionary<uint, List<int>>();
 
-            using (var conn = new MySqlConnection(ConnectionString))
+            using (var command = new MySqlCommand("SELECT npc_entry,spell_id FROM npc_spellclick_spells AS sc LEFT JOIN creature_template AS ct ON sc.npc_entry = ct.entry WHERE ct.VehicleId <>0", _conn))
             {
-                var command =
-                    new MySqlCommand(
-                        "SELECT npc_entry,spell_id FROM npc_spellclick_spells AS sc LEFT JOIN creature_template AS ct ON sc.npc_entry = ct.entry WHERE ct.VehicleId <>0",
-                        conn);
-
-                conn.Open();
-
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -82,13 +84,8 @@ namespace VehicleGarage.SQLStores
         {
             var dict = new Dictionary<uint, List<VehicleTemplateAccessory>>();
 
-            using (var conn = new MySqlConnection(ConnectionString))
+            using (var command = new MySqlCommand("SELECT entry,accessory_entry, CAST(seat_id AS UNSIGNED INTEGER) FROM vehicle_template_accessory", _conn))
             {
-                // Have to cast to UINT because tinyint(1) is treated like bool
-                var command = new MySqlCommand("SELECT entry,accessory_entry, CAST(seat_id AS UNSIGNED INTEGER) FROM vehicle_template_accessory",
-                                               conn);
-                conn.Open();
-
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())

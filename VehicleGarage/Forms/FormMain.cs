@@ -173,8 +173,8 @@ namespace VehicleGarage.Forms
 
         private void infoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var ab = new AboutForm();
-            ab.ShowDialog();
+            using (var ab = new AboutForm())
+                ab.ShowDialog();
         }
     }
 }
