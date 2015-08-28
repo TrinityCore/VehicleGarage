@@ -30,7 +30,7 @@ namespace VehicleGarage.SQLStores
         {
             var dict = new Dictionary<int, CreatureTemplate>();
 
-            using (var command = new MySqlCommand("SELECT entry,name,npcflag,unit_flags,dynamicflags,VehicleId,AIName,InhabitType,ScriptName,WDBVerified FROM creature_template WHERE VehicleId <>0", _conn))
+            using (var command = new MySqlCommand("SELECT entry,name,npcflag,unit_flags,dynamicflags,VehicleId,AIName,InhabitType,ScriptName,VerifiedBuild FROM creature_template WHERE VehicleId <>0", _conn))
             {
                 using (var reader = command.ExecuteReader())
                 {
@@ -47,7 +47,7 @@ namespace VehicleGarage.SQLStores
                                                         AIName = reader[6].ToString(),
                                                         InhabitType = reader[7].ToUInt32(),
                                                         ScriptName = reader[8].ToString(),
-                                                        WDBVerified = reader[9].ToUInt32()
+                                                        VerifiedBuild = reader[9].ToUInt32()
                                                     };
 
                         dict[creatureTemplate.Id.ToInt32()] = creatureTemplate;
@@ -97,7 +97,7 @@ namespace VehicleGarage.SQLStores
                                                 AccessoryEntry = reader[1].ToUInt32(),
                                                 SeatId = reader[2].ToByte(),
                                             };
-                        
+
                         if (!dict.ContainsKey(vehicle))
                             dict.Add(vehicle, new List<VehicleTemplateAccessory>());
                         dict[vehicle].Add(accessory);

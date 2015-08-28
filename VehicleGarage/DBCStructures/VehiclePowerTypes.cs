@@ -3,7 +3,6 @@
     public enum VehiclePowerTypes
     {
         None = 0,
-        PowerType_1 = 1,
         Pyrite = 41,
         Steam = 61,
         Heat = 101,

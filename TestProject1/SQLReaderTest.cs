@@ -8,8 +8,6 @@ using VehicleGarage.SQLStructures;
 
 namespace TestProject1
 {
-    
-    
     /// <summary>
     ///This is a test class for SQLReaderTest and is intended
     ///to contain all SQLReaderTest Unit Tests
@@ -36,7 +34,7 @@ namespace TestProject1
         }
 
         #region Additional test attributes
-        // 
+        //
         //You can use the following additional attributes as you write your tests:
         //
         //Use ClassInitialize to run code before running the first test in the class
@@ -80,7 +78,7 @@ namespace TestProject1
             Assert.AreEqual(record.AIName, String.Empty);
             Assert.AreEqual(record.InhabitType, 7u);
             Assert.AreEqual(record.ScriptName, String.Empty);
-            Assert.AreEqual(record.WDBVerified, 12340u);
+            Assert.AreEqual(record.VerifiedBuild, 12340u);
         }
 
         [TestMethod()]
@@ -100,7 +98,7 @@ namespace TestProject1
         public void LoadVehicleAccessoriesTest()
         {
             var actual = SQLReader.LoadVehicleAccessories();
-            
+
             List<VehicleTemplateAccessory> accessories;
             if (actual.TryGetValue(36678, out accessories))
                     foreach (var accessory in accessories)

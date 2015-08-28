@@ -14,6 +14,6 @@
         public string AIName;
         public uint InhabitType;
         public string ScriptName;
-        public uint WDBVerified;
+        public uint VerifiedBuild;
     }
 }

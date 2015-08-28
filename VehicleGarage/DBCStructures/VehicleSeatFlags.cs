@@ -27,10 +27,10 @@ namespace VehicleGarage.DBCStructures
         /// </summary>
         HasVehicleExitAnimForVoluntaryExit = 0x40000,
         HasVehicleExitAnimForForcedExit = 0x80000,
-        Flag_0X100000 = 0x100000,
+        PassengerNotSelectable = 0x100000,
         Flag_0X200000 = 0x200000,
         RecHasVehicleEnterAnim = 0x400000,
-        Flag_0X800000 = 0x800000,
+        IsUsingVehicleControls = 0x800000,
         EnableVehicleZoom = 0x1000000,
         CanEnterOrExit = 0x2000000,                                 // Lua_CanExitVehicle - can enter and exit at free will
         CanSwitchFromSeat = 0x4000000,                              // Lua_CanSwitchVehicleSeats
